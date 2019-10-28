@@ -12,17 +12,17 @@
         <th>money</th>
         <th>sum</th>
     </tr>
-{% for item_name,item_first,item_last,item_price,item_sale,item_money,item_sum in items %}
+{% for item_start,item_end in items %}
     <tr>
-        <th>{{item_name}}</th>
-        <td>{{item_first}}</td>
+        <th>{{item_start.item.name}}</th>
+        <td>{{item_start.value}}</td>
         <td>
-            <a id="label_{{forloop.counter}}" type="label" onclick="input_manager('{{forloop.counter}}')">{{item_last}}</a>
-            <input name="{{item_name}}" id="input_{{forloop.counter}}"  value="{{item_last}}"
+            <a id="label_{{forloop.counter}}" type="label" onclick="input_manager('{{forloop.counter}}')">{{item_end.value}}</a>
+            <input name="{{item_end.item.name}}" id="input_{{forloop.counter}}"  value="{{item_end.value}}"
                    type="hidden" onchange="input_change('{{forloop.counter}}','enter')" onfocusout="input_change('{{forloop.counter}}','offfocus')"/>
 
         </td>
-        <td>{{ item_price }}</td>
+        <td>{{ item_start.item.price }}</td>
         <td>{{ item_sale }}</td>
         <td>{{item_money }}</td>
         <td>{{ item_sum }}</td>

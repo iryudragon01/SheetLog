@@ -10,7 +10,7 @@ class data2view:
         for item in items:
             new_top_up = TopUp(
                 item=item,
-                volume=request.POST.get(item.name),
+                value=request.POST.get(item.name),
                 worker=request.user,
                 date_log=current_time)
             new_top_up.save()
