@@ -13,7 +13,7 @@
         {% if user.is_authenticated %}
         {% elif reload %}
         {% else %}
-        <meta http-equiv = "refresh" content = "2; url = {% url 'user:index' %}" />
+        <meta http-equiv = "refresh" content = "2; url = {% url 'account_control:index' %}" />
         {% endif %}
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
@@ -55,17 +55,17 @@
 
                 {% if user.is_authenticated %}
             <li class="nav-item">
-                <a class="btn btn-success" href="{% url 'user:index' %}">Home usert</a>
+                <a class="btn btn-success" href="{% url 'account_control:index' %}">Home usert</a>
             </li>
             <li class="nav-item">
-                <a class="btn btn-success" href="{% url 'user:logout' %}">Logout</a>
+                <a class="btn btn-success" href="{% url 'account_control:logout' %}">Logout</a>
             </li>
                 {% else %}
             <li>
-                <a class="btn btn-success" href="{% url 'user:index' %}">Login</a>
+                <a class="btn btn-success" href="{% url 'account_control:index' %}">Login</a>
             </li>
             <li class="nav-item">
-                <a class="btn btn-success" href="{% url 'user:register' %}">Register</a>
+                <a class="btn btn-success" href="{% url 'account_control:register' %}">Register</a>
             </li>
                 {% endif %}
 

@@ -7,7 +7,7 @@ from stock.iryu.Display.Data2View import Display
 # Create your views here.
 def IndexView(request):
     if not request.user.is_authenticated:
-        return redirect('account_manager:index')
+        return redirect('account_control:index')
     # if login check if item Exist
     else:
         if request.POST:  # if Post Update data

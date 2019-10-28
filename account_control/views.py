@@ -29,17 +29,17 @@ def RegisterView(request):
             new_user.save()
             update_user=UserStart.objects.get(username=username)
             User_Start_Handle.edit_user_start(User_Start_Handle,update_user)
-            return redirect('account_manager:index')
+            return redirect('account_control:index')
         else:
             content['registration_form'] = form
-            return render(request, 'account_manager/register.html', content)
+            return render(request, 'account_control/register.html', content)
 
     else:
         form = UserCreationForm()
         content['registration_form'] = form
     content['submit_value'] = 'Sign Up'
     content['reload'] = 'stop'
-    return render(request, 'account_manager/register.html', content)
+    return render(request, 'account_control/register.html', content)
 
 
 def LoginView(request):
@@ -62,9 +62,9 @@ def LoginView(request):
         content['registration_form'] = form
     content['reload'] = 'stop'
     content['submit_value'] = 'Login'
-    return render(request, 'account_manager/register.html', content)
+    return render(request, 'account_control/register.html', content)
 
 
 def LogoutView(request):
     logout(request)
-    return redirect('account_manager:index')
+    return redirect('account_control:index')

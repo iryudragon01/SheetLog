@@ -1,8 +1,7 @@
-from account_manager.models import User_Start
+from account_control.models import UserStart
 from stock.models import Item, LogSheet,TempExpense,TopUp,Income,Expense,DisplayLogSheet
 from django.utils import timezone
-from account_manager.iryu.user_start_script import User_Start_Handle
-from stock.iryu.Top_up_link import Top_up_work
+from account_control.iryu.user_start_script import User_Start_Handle
 
 
 class Display:
@@ -21,7 +20,7 @@ class Display:
                                          end_log_version=1)
                 new_log_sheet.save()
         # retrieve data from log sheet
-        worker = User_Start.objects.get(username=request.user)
+        worker = UserStart.objects.get(username=request.user)
         log_sheet_starts = LogSheet.objects.filter(version=worker.version_log)
         log_sheet_ends = LogSheet.objects.filter(version=LogSheet.objects.last().version)
         top_ups = TopUp.objects.filter(date_log__gt=worker.date_log)
