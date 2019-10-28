@@ -1,0 +1,28 @@
+{% extends 'stock/layout.html' %}
+{% block content %}
+{% if items %}
+<main role="main" class="container">
+            <div class="row">
+              <div class="col-md-3">
+
+<form class="form" action="" method="post">
+    {% csrf_token %}
+    <div class="form-group row">
+    {%for item in items %}
+        <div class="form-group">
+            <label class="form-control-label">{{item.name}}</label>
+            <input class="form-control form-control-lg" type="number" name="{{item.name}}" value="0" \>
+            <br>
+        </div>
+    {% endfor %}
+    <input type="submit" value="Top Up">
+    </div>
+
+</form>
+</div>
+            </div>
+</main>
+
+{% endif %}
+{% endblock %}
+k script %}

@@ -1,22 +1,21 @@
-"""SheetLog URL Configuration
+from django.urls import path
+from stock.iryu.Item import views as item_views
+from stock.iryu.Top_up import views as top_up_views
+from stock.iryu.Display import views as display_views
+app_name = 'stock'
+urlpatterns=[
+    # Display
+    path('',display_views.IndexView,name='index'),
 
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/2.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
-from django.contrib import admin
-from django.urls import path,include
 
-urlpatterns = [
-    path('',include('stock.urls')),
-    path('admin/', admin.site.urls),
+    # Item
+    path('item/create/',item_views.CreateView,name='itemcreate'),
+    path('item/list/',item_views.ListView,name='itemlist'),
+    path('item/edit/<int:pk>/',item_views.EditView,name='itemedit'),
+
+    # topup
+    path('topup/',top_up_views.Top_up_View,name='topup'),
+    path('topup/list/',top_up_views.Top_up_List_View,name='topup_list'),
+    path('topup/edit/<int:pk>',top_up_views.Top_up_Edit_View,name='topup_edit'),
+
 ]

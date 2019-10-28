@@ -1,0 +1,9 @@
+
+        <li class="nav-item">
+            <label  class="btn btn-success dropdown-toggle"  data-toggle="dropdown" > สินค้า </label>
+            <ul class="dropdown-menu">
+                <li><a  href="{% url 'stock:itemlist' %} ">สินค้าทั้งหมด</a></li>
+                <li><a  href="{% url 'stock:itemcreate' %} ">สร้างสินค้า</a></li>
+                <li><a href="{% url 'stock:topup' %}">เติมสินค้า</a></li>
+            </ul>
+        </li>

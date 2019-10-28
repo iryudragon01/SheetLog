@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+{% load static%}
+<html>
+    <head>
+        <title>shop
+            {%if title%}
+            -{{title}}
+            {%endif%}
+        </title>
+        <!-- style by static
+        <link rel="stylesheet" href="{%static 'stock/main.css'%}" type="text/css"  >
+        -->
+        {% if user.is_authenticated %}
+        {% elif reload %}
+        {% else %}
+        <meta http-equiv = "refresh" content = "2; url = {% url 'user:index' %}" />
+        {% endif %}
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+              crossorigin="anonymous">
+    </head>
+    <body >
+    <!-- Nav bar  -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="btn btn-success" href="{% url 'stock:index' %}">Home</a>
+            </li>
+            {% if user.is_authenticated %}
+            {% include 'stock/menu/leftmenu.html' %}
+            <li class="nav-item">
+                <a class="btn btn-success" href="{% url 'stock:itemcreate'%}">เพิ่มสินค้า</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-success" href="{% url 'stock:topup'%}">top up สินค้า</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-success" href="#">Link</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-success" href="#">Link</a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+    <div class="mx-auto order-0">
+        <a class="navbar-brand mx-auto" href="#">{{user}}</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+        <ul class="navbar-nav ml-auto">
+
+                {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="btn btn-success" href="{% url 'user:index' %}">Home usert</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-success" href="{% url 'user:logout' %}">Logout</a>
+            </li>
+                {% else %}
+            <li>
+                <a class="btn btn-success" href="{% url 'user:index' %}">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-success" href="{% url 'user:register' %}">Register</a>
+            </li>
+                {% endif %}
+
+        </ul>
+    </div>
+    </nav>
+        {% if message %}
+            <div class="{{message_class}}" >{{message}}</div>
+        {% endif %}
+
+
+
+
+
+                {% block content %}{% endblock %}
+
+
+
+
+
+
+
+
+
+        {% block script %}
+        {% endblock script %}
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    </body>
+</html>

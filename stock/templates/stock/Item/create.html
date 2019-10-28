@@ -1,0 +1,52 @@
+{%extends 'stock/layout.html'%}
+{%block content%}
+<p class="result">{{createnewitem}}</p>
+<form action="" method="post">
+    {%csrf_token%}
+    <table width="40%">
+        <tr>
+            <th>
+                ชื่อสินค้า
+            </th>
+            <th>
+                <input name="name" />
+            </th>
+
+        </tr>
+        <tr>
+            <th>
+                ราคาต่อหน่วย
+            </th>
+            <th>
+                <input name="price" />
+            </th>
+
+        </tr>
+        <tr>
+            <th>
+                ประเภทสินค้า
+            </th>
+            <th>
+                <select name="type" width=100%>
+                  <option value="1">Ticket</option>
+                  <option value="2">Air Pay</option>
+                  <option value="3">Food</option>
+                </select>
+            </th>
+
+        </tr>
+        <tr>
+            <th></th>
+            <th>
+                <input type="submit" value="เพิ่มชนิดสินค้า" />
+
+            </th>
+        </tr>
+
+
+    </table>
+
+
+</form>
+
+{%endblock%}

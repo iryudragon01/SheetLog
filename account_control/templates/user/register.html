@@ -1,0 +1,44 @@
+{% extends 'stock/layout.html' %}
+{% block content %}
+
+<div class="container">
+    <form action="" method="post">
+        {% csrf_token %}
+        {% for field in registration_form %}
+        <p><div>{{ field.label_tag}}</div>
+        <div>{{field}}</div>
+            {% if field.help_text %}
+        <div><small class="text-muted">{{field.help_text}}</small></div>
+            {% endif %}
+        <div>
+            {% for error in field.errors %}
+            <p class="text-danger">{{error}}</p>
+            {% endfor %}
+        </div>
+
+
+        </p>
+
+        {% endfor %}
+        <p><input type="submit" value="{{submit_value}}"></p>
+    </form>
+
+{% endblock content %}
+
+{% block script %}
+
+var password = document.getElementById("password")
+  , confirm_password = document.getElementById("confirm_password");
+
+function validatePassword(){
+  if(password.value != confirm_password.value) {
+    confirm_password.setCustomValidity("Passwords Don't Match");
+  } else {
+    confirm_password.setCustomValidity('');
+  }
+}
+
+password.onchange = validatePassword;
+confirm_password.onkeyup = validatePassword;
+
+{% endblock script %}

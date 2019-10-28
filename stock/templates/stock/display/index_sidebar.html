@@ -1,0 +1,24 @@
+<div class="content-group"><h1>topup list</h1></div>
+{% if top_ups %}
+    <table class="table table-dark" >
+        {% for top_up,date_log in top_ups %}
+        <tr>
+            {% ifequal date_log 'name' %}
+            <th>ชื่อ</th>
+            {% else %}
+            <th>{{date_log.day}}/{{date_log.month}}/{{date_log.year}}
+
+
+            </th>
+            {%endifequal %}
+            {% for row_top_up in top_up %}
+                {% ifequal date_log 'name' %}
+                    <th>{{row_top_up}}<th>
+                {% else %}
+                    <td>{{row_top_up}}<td>
+                {% endifequal %}
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+{% endif %}
