@@ -6,7 +6,6 @@ class data2view:
     def top_up(self,request):
         items = Item.objects.filter(type=3)
         current_time = timezone.now()
-        print('hello for item',items.count())
         for item in items:
             new_top_up = TopUp(
                 item=item,

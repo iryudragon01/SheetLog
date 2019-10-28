@@ -1,12 +1,11 @@
 from account_control.models import UserStart
-from stock.models import Item, LogSheet, TempExpense, TopUp, Income, Expense, DisplayLogSheet
+from stock.models import Item, LogSheet, TempExpense, TopUp, Income, Expense, DisplayLogSheet,DisplayTopUp,DisplayDate
 from django.utils import timezone
 from account_control.iryu.user_start_script import User_Start_Handle
 
 
 class Display:
     def getdisplay(self, request):
-        content = {'account_control': request.user}
         all_item = Item.objects.all()
 
         # create log sheet if not exist
@@ -42,8 +41,9 @@ class Display:
             for display_log_sheet in DisplayLogSheet.objects.filter(type=1):
                 if top_up.item == display_log_sheet.item:
                     display_log_sheet.value += top_up.value
+                    display_log_sheet.save()
 
-
+        get_topup=self.gettopup(self,request=request,worker=worker,items=items,top_ups=top_ups)
         content = {'items': zip(DisplayLogSheet.objects.filter(type=1), DisplayLogSheet.objects.filter(type=2))}
 
         return content
@@ -51,7 +51,37 @@ class Display:
     #  End get display
 
     # get topup
+    def gettopup(self,request,worker,items,top_ups):
+        content = {}
+        DisplayDate.objects.all().delete()
+        index=2
+        for item in items:
+            DisplayTopUp(item=item, value=0, row=1, date_log=worker.date_log).save()
 
+        for top_up in top_ups:
+            if DisplayDate.objects.filter(date_log =top_up.date_log).count()==0:
+                new_display_date = DisplayDate(date_log=top_up.date_log,row=index)
+                new_display_date.save()
+                index += 1
+
+        for display_date in DisplayDate.objects.all():
+            for item in items:
+                if TopUp.objects.filter(date_log=display_date.date_log,item=item).count()==1:
+                    DisplayTopUp(item=item,
+                                 value=TopUp.objects.get(date_log=display_date.date_log,item=item).value,
+                                 row=display_date.row,
+                                 date_log=display_date.date_log
+                                 ).save()
+                else:
+                    DisplayTopUp(item=item,value=0,row=display_date.row,date_log=display_date.date_log).save()
+
+
+
+
+
+
+
+        return content
     # start set display
     def setdisplay(self, request):
         items = Item.objects.all()

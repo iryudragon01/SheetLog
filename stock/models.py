@@ -61,6 +61,12 @@ class DisplayTopUp(models.Model):
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     date_log = models.DateTimeField()
     row = models.PositiveIntegerField()
+    value = models.PositiveIntegerField(default=0)
+
+
+class DisplayDate(models.Model):
+    date_log = models.DateTimeField()
+    row = models.PositiveIntegerField()
 
 
 class DisplayIncome(models.Model):
