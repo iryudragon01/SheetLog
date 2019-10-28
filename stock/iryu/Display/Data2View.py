@@ -14,10 +14,8 @@ class Display:
             for item in all_item:
                 new_log_sheet = LogSheet(item=item,
                                          version=1,
-                                         Last_stock=0,  # stock last value
-                                         date_log=timezone.now(),
-                                         start_log_version=1,
-                                         end_log_version=1)
+                                         value=0,  # stock last value
+                                         date_log=timezone.now())
                 new_log_sheet.save()
         # retrieve data from log sheet
         worker = UserStart.objects.get(username=request.user)
@@ -31,13 +29,13 @@ class Display:
             start_log= DisplayLogSheet(item=item, value=0, type=1)
             for log_sheet_start in log_sheet_starts:
                 if log_sheet_start.item==item:
-                    start_log.value=log_sheet_start.Last_stock
+                    start_log.value=log_sheet_start.value
             start_log.save()
         for item in items:
             end_log= DisplayLogSheet(item=item, value=0, type=2)
             for log_sheet_end in log_sheet_ends:
                 if log_sheet_end.item==item:
-                    start_log.value=log_sheet_end.Last_stock
+                    start_log.value=log_sheet_end.value
             end_log.save()
 
 
@@ -96,7 +94,7 @@ class Display:
         for item in items:
             new_log_sheet = LogSheet(item=item,
                                      version=log_sheet_last.version + 1,
-                                     Last_stock=request.POST.get(item.name),
+                                     value=request.POST.get(item.name),
                                      date_log=current_time,
                                      start_log_version=worker.version_log,
                                      end_log_version=log_sheet_last.version)
