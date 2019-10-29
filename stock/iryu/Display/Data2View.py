@@ -43,7 +43,7 @@ class Display:
                     display_log_sheet.value += top_up.value
                     display_log_sheet.save()
 
-        get_top_up = self.gettopup(self, worker=worker, top_ups=top_ups)
+        get_top_up = self.gettopup(self, worker=worker, top_ups=top_ups,logsheet=log_sheet_start)
         content = {'items': zip(DisplayLogSheet.objects.filter(type=1), DisplayLogSheet.objects.filter(type=2)),
                    'top_ups': get_top_up
                    }
@@ -52,7 +52,7 @@ class Display:
     #  End get display
 
     # get topup
-    def gettopup(self, worker, top_ups):
+    def gettopup(self, worker, top_ups,logsheet):
         # Claer DisplayDate and DisplayTopUp table
         DisplayDate.objects.all().delete()
         DisplayTopUp.objects.all().delete()
@@ -60,35 +60,45 @@ class Display:
         items = Item.objects.filter(type=3)
         index = 2
         for item in items:
-            DisplayTopUp(item=item, value=0, row=1, date_log=worker.date_log).save()
+            new_display = DisplayTopUp(item=item,row=1,date_log=worker.date_log)
+            new_display.save()
+            for sheet in  LogSheet.objects.filter(version=worker.version_log):
+                if sheet.item==new_display.item:
+                    new_display.value=sheet.value
+                    new_display.save()
+        if top_ups.count()>0:
+            last_version = top_ups.last().version
+            for row in range(last_version+1):
+                if top_ups.filter(version=row).count()>0:
+                    for item in items:
+                        new_display = DisplayTopUp(item=item,row=index,date_log=timezone.now())
+                        new_display.save()
+                        for top_up in top_ups:
+                            if top_up.version==row and top_up.item==new_display.item:
+                                new_display.value=top_up.value
+                                new_display.date_log=top_up.date_log
+                                new_display.save()
 
-        for top_up in TopUp.objects.filter(date_log__gt=worker.date_log):
-            if DisplayDate.objects.filter(date_log=top_up.date_log).count() == 0:
-                new_display_date = DisplayDate(date_log=top_up.date_log, row=index)
-                new_display_date.save()
-                index += 1
+                    index += 1
 
-        for display_date in DisplayDate.objects.all():
-            for item in items:
-                DisplayTopUp(item=item, value=0, date_log=display_date.date_log,row=display_date.row).save()
 
-        for top_up in TopUp.objects.filter(date_log__gt=worker.date_log):
-            edit_display = DisplayTopUp.objects.get(item=top_up.item,date_log=top_up.date_log)
-            edit_display.value=top_up.value
-
-            edit_display.save()
-            print(edit_display.value,'  hello')
 
 
 
 
         top_up_list = []
-        for row in range(DisplayDate.objects.all().count()):
-            if row == 0:
-                top_up_list.append(items)
+        for row in range(int(DisplayTopUp.objects.all().count()/items.count())+1):
+            if row==0:
+                sub_list=['name']
+                for item in items:
+                    sub_list.append(item.name)
+                top_up_list.append(sub_list)
             else:
-                top_up_list.append(DisplayTopUp.objects.filter(row=row))
-        print('top up list row :', len(top_up_list))
+                sub_list = [DisplayTopUp.objects.get(item=item,row=row).date_log]
+                for top_up in DisplayTopUp.objects.filter(row=row):
+                    sub_list.append(top_up.value)
+                top_up_list.append(sub_list)
+
         return top_up_list
 
     # start set display

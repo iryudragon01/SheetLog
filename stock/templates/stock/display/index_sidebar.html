@@ -4,16 +4,14 @@
         {% for top_up in top_ups %}
             {% ifequal forloop.counter 1 %}
                 <tr>
-                <th>ชื่อ</th>
                     {% for item in top_up %}
-                        <th>{{item.name}}</th>
+                        <th>{{item}}</th>
                     {% endfor %}
                         </tr>
             {% else %}
                         <tr>
-                        <th>day</th>
                     {% for fill in top_up %}
-                        <td>{{fill.item.name}}={{fill.date_log}}={{fill.value}}</td>
+                        <td>{{fill}}</td>
                     {% endfor %}
                         </tr>
             {% endifequal %}
