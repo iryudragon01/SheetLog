@@ -1,5 +1,5 @@
 from account_control.models import UserStart
-from stock.models import Item, LogSheet, TempExpense, TopUp, Income, Expense, DisplayLogSheet, DisplayTopUp
+from stock.models import Item, LogSheet, TempExpense, TopUp, Income, Expense
 from django.utils import timezone
 from account_control.iryu.user_start_script import User_Start_Handle
 from django.db.models import Sum
@@ -26,8 +26,7 @@ class Display:
         log_sheet_ends = LogSheet.objects.filter(version=LogSheet.objects.last().version)
         top_ups = TopUp.objects.filter(date_log__gt=worker.date_log)
         items = Item.objects.all()
-        # delete old Log sheet display
-        DisplayLogSheet.objects.all().delete()
+
         for item in items:
             sheet_start = 0
             sheet_end = 0
@@ -74,17 +73,12 @@ class Display:
                 row_top=top_ups.filter(version=loop)
                 top_data=['']
                 for item in items:
-                    data_item = 0
+                    data_item = ''
                     if row_top.filter(item=item).count()==1:
                         data_item = row_top.get(item=item).value
-                        top_data[0] = row_top.get(item=item).date_log
+                        top_data[0] = row_top.get(item=item).date_log.strftime("%d/%m/%y %H:%M")
                     top_data.append(data_item)
                 ListTop.append(top_data)
-                print('loop ',loop,' ',top_data)
-
-
-
-
         return ListTop
 
     # start set display

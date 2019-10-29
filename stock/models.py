@@ -51,43 +51,43 @@ class TempExpense(models.Model):
     date_log = models.DateTimeField()
 
 
-# Display models
-class DisplayLogSheet(models.Model):
-    item = models.ForeignKey(Item, on_delete=models.CASCADE)
-    value = models.PositiveIntegerField(default=0)
-    type = models.PositiveIntegerField()  # 1 for start 2 for end
-
-
-class DisplayTopUp(models.Model):
-    item = models.ForeignKey(Item, on_delete=models.CASCADE)
-    date_log = models.DateTimeField()
-    row = models.PositiveIntegerField()
-    value = models.PositiveIntegerField(default=0)
+# # Display models
+# class DisplayLogSheet(models.Model):
+#     item = models.ForeignKey(Item, on_delete=models.CASCADE)
+#     value = models.PositiveIntegerField(default=0)
+#     type = models.PositiveIntegerField()  # 1 for start 2 for end
+#
+# #
+# class DisplayTopUp(models.Model):
+#     item = models.ForeignKey(Item, on_delete=models.CASCADE)
+#     date_log = models.DateTimeField()
+#     row = models.PositiveIntegerField()
+#     value = models.PositiveIntegerField(default=0)
 
 #
 # class DisplayDate(models.Model):
 #     date_log = models.DateTimeField()
 #     row = models.PositiveIntegerField()
 
-
-class DisplayIncome(models.Model):
-    item = models.ForeignKey(Income, on_delete=models.CASCADE)
-    version = models.PositiveIntegerField()  # set version for query object and display old log
-    # date of log sheet until display object create
-    date_log = models.DateTimeField()
-
-
-class DisplayExpense(models.Model):
-    item = models.ForeignKey(Expense, on_delete=models.CASCADE)
-    version = models.PositiveIntegerField()  # set version for query object and display old log
-    # date of log sheet until display object create
-    date_log = models.DateTimeField()
-
-
-class DisplayTempExpense(models.Model):
-    item = models.ForeignKey(TempExpense, on_delete=models.CASCADE)
-    version = models.PositiveIntegerField()  # set version for query object and display old log
-    # date of log sheet until display object create
-    date_log = models.DateTimeField()
-
-
+#
+# class DisplayIncome(models.Model):
+#     item = models.ForeignKey(Income, on_delete=models.CASCADE)
+#     version = models.PositiveIntegerField()  # set version for query object and display old log
+#     # date of log sheet until display object create
+#     date_log = models.DateTimeField()
+#
+#
+# class DisplayExpense(models.Model):
+#     item = models.ForeignKey(Expense, on_delete=models.CASCADE)
+#     version = models.PositiveIntegerField()  # set version for query object and display old log
+#     # date of log sheet until display object create
+#     date_log = models.DateTimeField()
+#
+#
+# class DisplayTempExpense(models.Model):
+#     item = models.ForeignKey(TempExpense, on_delete=models.CASCADE)
+#     version = models.PositiveIntegerField()  # set version for query object and display old log
+#     # date of log sheet until display object create
+#     date_log = models.DateTimeField()
+#
+#
