@@ -1,3 +1,4 @@
+from stock.iryu.Display.calculater import volume_sale,item_money
 from account_control.models import UserStart
 from stock.models import Item, LogSheet, TempExpense, TopUp, Income, Expense
 from django.utils import timezone
@@ -7,9 +8,12 @@ from django.db.models import Sum
 
 class Display:
     def getdisplay(self, request):
-        DictLog = {}
         ListFirst = []
         ListEnd = []
+        ListVolume = []
+        ListMoney =[]
+        ListSum = []
+        Sum_temp = 0
         all_item = Item.objects.all()
 
         # create log sheet if not exist
@@ -40,9 +44,14 @@ class Display:
             if log_sheet_ends.filter(item=item).count() == 1:
                 sheet_end=log_sheet_ends.get(item=item).value
             ListEnd.append(sheet_end)
+            # call function from other file
+            ListVolume.append(volume_sale(item,sheet_start,sheet_end))
+            ListMoney.append(item_money(item,sheet_start,sheet_end))
+            Sum_temp += item_money(item,sheet_start,sheet_end)
+            ListSum.append(Sum_temp)
 
         get_top_up = self.gettopup(self, worker=worker, top_ups=top_ups,logsheet=log_sheet_starts)
-        content = {'items': zip(items,ListFirst,ListEnd),
+        content = {'items': zip(items,ListFirst,ListEnd,ListVolume,ListMoney,ListSum),
                    'top_ups': get_top_up
                    }
         return content

@@ -12,7 +12,7 @@
         <th>money</th>
         <th>sum</th>
     </tr>
-{% for item,item_start,item_end in items %}
+{% for item,item_start,item_end,item_sale,item_money,item_sum in items %}
     <tr>
         <th>{{item.name}}</th>
         <td>{{item_start}}</td>
@@ -22,7 +22,7 @@
                    type="hidden" onchange="input_change('{{forloop.counter}}','enter')" onfocusout="input_change('{{forloop.counter}}','offfocus')"/>
 
         </td>
-        <td>{{ item_start.item.price }}</td>
+        <td>{{ item.price }}</td>
         <td>{{ item_sale }}</td>
         <td>{{item_money }}</td>
         <td>{{ item_sum }}</td>
