@@ -4,6 +4,7 @@ from stock.models import Item, LogSheet, TempExpense, TopUp, Income, Expense
 from django.utils import timezone
 from account_control.iryu.user_start_script import User_Start_Handle
 from django.db.models import Sum
+from datetime import datetime
 
 
 class Display:
@@ -85,7 +86,7 @@ class Display:
                     data_item = ''
                     if row_top.filter(item=item).count()==1:
                         data_item = row_top.get(item=item).value
-                        top_data[0] = row_top.get(item=item).date_log.strftime("%d/%m/%y %H:%M")
+                        top_data[0] = row_top.get(item=item).date_log   # .strftime("%d/%m/%y %H:%M")
                     top_data.append(data_item)
                 ListTop.append(top_data)
         return ListTop
