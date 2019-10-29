@@ -7,6 +7,9 @@ from django.db.models import Sum
 
 class Display:
     def getdisplay(self, request):
+        DictLog = {}
+        ListFirst = []
+        ListEnd = []
         all_item = Item.objects.all()
 
         # create log sheet if not exist
@@ -26,22 +29,22 @@ class Display:
         # delete old Log sheet display
         DisplayLogSheet.objects.all().delete()
         for item in items:
-            start_log = DisplayLogSheet(item=item, value=0, type=1)
-            end_log = DisplayLogSheet(item=item, value=0, type=2)
+            sheet_start = 0
+            sheet_end = 0
+            if log_sheet_starts.filter(item=item).count() == 1:
+                sheet_start = log_sheet_starts.get(item=item).value
             if item.type==3:
                 item_top_ups = TopUp.objects.filter(item=item,date_log__gt=worker.date_log).aggregate(Sum('value'))
                 sum_top_up = item_top_ups['value__sum']
-                start_log.value += int(sum_top_up)
-            if log_sheet_starts.filter(item=item).count() == 1:
-                start_log.value=log_sheet_starts.get(item=item).value
-            start_log.save()
+                sheet_start += int(sum_top_up)
+            ListFirst.append(sheet_start)
             if log_sheet_ends.filter(item=item).count() == 1:
-                end_log.value=log_sheet_ends.get(item=item).value
-            end_log.save()
+                sheet_end=log_sheet_ends.get(item=item).value
+            ListEnd.append(sheet_end)
 
-        get_top_up = self.gettopup(self, worker=worker, top_ups=top_ups)
-        content = {'items': zip(DisplayLogSheet.objects.filter(type=1), DisplayLogSheet.objects.filter(type=2)),
-                   'top_ups': get_top_up
+        #get_top_up = self.gettopup(self, worker=worker, top_ups=top_ups)
+        content = {'items': zip(items,ListFirst,ListEnd),
+                   'top_ups': {} #get_top_up
                    }
         return content
 
