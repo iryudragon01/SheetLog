@@ -7,7 +7,7 @@
 {% for top_up in top_ups %}
     <tr><th>{{top_up.item.name}}</th>
         <td>{{top_up.id}}</td>
-        <td>{{top_up.volume}}</td>
+        <td>{{top_up.value}}</td>
         <td>
             {{top_up.date_log}}</td>
         <th><a href="{% url 'stock:topup_edit' top_up.id %}" >แก้ไข</a></th>

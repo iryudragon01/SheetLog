@@ -18,7 +18,8 @@ class data2view:
                 date_log=save_time,
                 version=top_up_version
             )
-            new_top_up.save()
+            if int(new_top_up.value) > 0:
+                new_top_up.save()
 
     def edit(self,request,pk):
         if 'DELETE' in request.POST:
@@ -26,7 +27,7 @@ class data2view:
             del_top_up.delete()
         else:
             update_top_up = TopUp.objects.get(id=pk)
-            update_top_up.volume = int(request.POST.get('volume'))
+            update_top_up.value = int(request.POST.get('value'))
             update_top_up.save()
 
     def list(self,request):
