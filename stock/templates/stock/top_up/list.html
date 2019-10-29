@@ -2,11 +2,12 @@
 {%block content%}
 <table width="40%">
     <tr>
-        <th>name</th><th>id</th><th>price</th><th>type</th><th></th>
+        <th>name</th><th>id</th><th>version</th><th>value</th><th>date</th><th></th>
     </tr>
 {% for top_up in top_ups %}
     <tr><th>{{top_up.item.name}}</th>
         <td>{{top_up.id}}</td>
+        <td>{{top_up.version}}</td>
         <td>{{top_up.value}}</td>
         <td>
             {{top_up.date_log}}</td>

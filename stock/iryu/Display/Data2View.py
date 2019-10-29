@@ -69,7 +69,7 @@ class Display:
 
         top_last=top_ups.last().version
 
-        for loop in range(top_last):
+        for loop in range(top_last+1):
             if top_ups.filter(version=loop).count()>0:
                 row_top=top_ups.filter(version=loop)
                 top_data=['']
@@ -80,6 +80,7 @@ class Display:
                         top_data[0] = row_top.get(item=item).date_log
                     top_data.append(data_item)
                 ListTop.append(top_data)
+                print('loop ',loop,' ',top_data)
 
 
 
