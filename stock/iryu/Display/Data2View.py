@@ -2,6 +2,7 @@ from account_control.models import UserStart
 from stock.models import Item, LogSheet, TempExpense, TopUp, Income, Expense, DisplayLogSheet, DisplayTopUp
 from django.utils import timezone
 from account_control.iryu.user_start_script import User_Start_Handle
+from django.db.models import Sum
 
 
 class Display:
@@ -26,33 +27,28 @@ class Display:
         DisplayLogSheet.objects.all().delete()
         for item in items:
             start_log = DisplayLogSheet(item=item, value=0, type=1)
-            for log_sheet_start in log_sheet_starts:
-                if log_sheet_start.item == item:
-                    start_log.value = log_sheet_start.value
-            start_log.save()
-        for item in items:
             end_log = DisplayLogSheet(item=item, value=0, type=2)
-            for log_sheet_end in log_sheet_ends:
-                if log_sheet_end.item == item:
-                    start_log.value = log_sheet_end.value
+            if item.type==3:
+                item_top_ups = TopUp.objects.filter(item=item,date_log__gt=worker.date_log).aggregate(Sum('value'))
+                sum_top_up = item_top_ups['value__sum']
+                start_log.value += int(sum_top_up)
+            if log_sheet_starts.filter(item=item).count() == 1:
+                start_log.value=log_sheet_starts.get(item=item).value
+            start_log.save()
+            if log_sheet_ends.filter(item=item).count() == 1:
+                end_log.value=log_sheet_ends.get(item=item).value
             end_log.save()
 
-        for top_up in top_ups:
-            for display_log_sheet in DisplayLogSheet.objects.filter(type=1):
-                if top_up.item == display_log_sheet.item:
-                    display_log_sheet.value += top_up.value
-                    display_log_sheet.save()
-
-        #get_top_up = self.gettopup(self, worker=worker, top_ups=top_ups,logsheet=log_sheet_start)
+        get_top_up = self.gettopup(self, worker=worker, top_ups=top_ups)
         content = {'items': zip(DisplayLogSheet.objects.filter(type=1), DisplayLogSheet.objects.filter(type=2)),
-                   'top_ups': {} #get_top_up
+                   'top_ups': get_top_up
                    }
         return content
 
     #  End get display
 
     # get topup
-    def gettopup(self, worker, top_ups,logsheet):
+    def gettopup(self, worker, top_ups):
         # Claer DisplayDate and DisplayTopUp table
         DisplayTopUp.objects.all().delete()
 
@@ -79,12 +75,6 @@ class Display:
                                 new_display.save()
 
                     index += 1
-
-
-
-
-
-
         top_up_list = []
         for row in range(int(DisplayTopUp.objects.all().count()/items.count())+1):
             if row==0:
