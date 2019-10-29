@@ -1,5 +1,5 @@
 from account_control.models import UserStart
-from stock.models import Item, LogSheet, TempExpense, TopUp, Income, Expense, DisplayLogSheet,DisplayTopUp,DisplayDate
+from stock.models import Item, LogSheet, TempExpense, TopUp, Income, Expense, DisplayLogSheet, DisplayTopUp, DisplayDate
 from django.utils import timezone
 from account_control.iryu.user_start_script import User_Start_Handle
 
@@ -43,45 +43,52 @@ class Display:
                     display_log_sheet.value += top_up.value
                     display_log_sheet.save()
 
-        get_topup=self.gettopup(self,request=request,worker=worker,items=items,top_ups=top_ups)
-        content = {'items': zip(DisplayLogSheet.objects.filter(type=1), DisplayLogSheet.objects.filter(type=2))}
-
+        get_top_up = self.gettopup(self, worker=worker, top_ups=top_ups)
+        content = {'items': zip(DisplayLogSheet.objects.filter(type=1), DisplayLogSheet.objects.filter(type=2)),
+                   'top_ups': get_top_up
+                   }
         return content
 
     #  End get display
 
     # get topup
-    def gettopup(self,request,worker,items,top_ups):
-        content = {}
+    def gettopup(self, worker, top_ups):
+        # Claer DisplayDate and DisplayTopUp table
         DisplayDate.objects.all().delete()
-        index=2
+        DisplayTopUp.objects.all().delete()
+
+        items = Item.objects.filter(type=3)
+        index = 2
         for item in items:
             DisplayTopUp(item=item, value=0, row=1, date_log=worker.date_log).save()
 
-        for top_up in top_ups:
-            if DisplayDate.objects.filter(date_log =top_up.date_log).count()==0:
-                new_display_date = DisplayDate(date_log=top_up.date_log,row=index)
+        for top_up in TopUp.objects.filter(date_log__gt=worker.date_log):
+            if DisplayDate.objects.filter(date_log=top_up.date_log).count() == 0:
+                new_display_date = DisplayDate(date_log=top_up.date_log, row=index)
                 new_display_date.save()
                 index += 1
 
         for display_date in DisplayDate.objects.all():
             for item in items:
-                if TopUp.objects.filter(date_log=display_date.date_log,item=item).count()==1:
-                    DisplayTopUp(item=item,
-                                 value=TopUp.objects.get(date_log=display_date.date_log,item=item).value,
-                                 row=display_date.row,
-                                 date_log=display_date.date_log
-                                 ).save()
-                else:
-                    DisplayTopUp(item=item,value=0,row=display_date.row,date_log=display_date.date_log).save()
+                DisplayTopUp(item=item, value=0, date_log=display_date.date_log,row=display_date.row).save()
+
+        for top_up in TopUp.objects.filter(date_log__gt=worker.date_log):
+            edit_display = DisplayTopUp.objects.get(item=top_up.item,date_log=top_up.date_log)
+            edit_display.value=top_up.value
+            edit_display.save()
 
 
 
 
+        top_up_list = []
+        for row in range(DisplayDate.objects.all().count()):
+            if row == 0:
+                top_up_list.append(items)
+            else:
+                top_up_list.append(DisplayTopUp.objects.filter(row=row))
+        print('top up list row :', len(top_up_list))
+        return top_up_list
 
-
-
-        return content
     # start set display
     def setdisplay(self, request):
         items = Item.objects.all()
