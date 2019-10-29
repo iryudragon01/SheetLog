@@ -1,5 +1,5 @@
 from account_control.models import UserStart
-from stock.models import Item, LogSheet, TempExpense, TopUp, Income, Expense, DisplayLogSheet, DisplayTopUp, DisplayDate
+from stock.models import Item, LogSheet, TempExpense, TopUp, Income, Expense, DisplayLogSheet, DisplayTopUp
 from django.utils import timezone
 from account_control.iryu.user_start_script import User_Start_Handle
 
@@ -43,9 +43,9 @@ class Display:
                     display_log_sheet.value += top_up.value
                     display_log_sheet.save()
 
-        get_top_up = self.gettopup(self, worker=worker, top_ups=top_ups,logsheet=log_sheet_start)
+        #get_top_up = self.gettopup(self, worker=worker, top_ups=top_ups,logsheet=log_sheet_start)
         content = {'items': zip(DisplayLogSheet.objects.filter(type=1), DisplayLogSheet.objects.filter(type=2)),
-                   'top_ups': get_top_up
+                   'top_ups': {} #get_top_up
                    }
         return content
 
@@ -54,7 +54,6 @@ class Display:
     # get topup
     def gettopup(self, worker, top_ups,logsheet):
         # Claer DisplayDate and DisplayTopUp table
-        DisplayDate.objects.all().delete()
         DisplayTopUp.objects.all().delete()
 
         items = Item.objects.filter(type=3)

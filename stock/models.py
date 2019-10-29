@@ -64,10 +64,10 @@ class DisplayTopUp(models.Model):
     row = models.PositiveIntegerField()
     value = models.PositiveIntegerField(default=0)
 
-
-class DisplayDate(models.Model):
-    date_log = models.DateTimeField()
-    row = models.PositiveIntegerField()
+#
+# class DisplayDate(models.Model):
+#     date_log = models.DateTimeField()
+#     row = models.PositiveIntegerField()
 
 
 class DisplayIncome(models.Model):
