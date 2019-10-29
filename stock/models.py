@@ -23,6 +23,7 @@ class TopUp(models.Model):  # fill up
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     value = models.PositiveIntegerField()
     worker = models.CharField(max_length=200)
+    version = models.PositiveIntegerField(default=0)
     date_log = models.DateTimeField(auto_now=True)
 
     def get_absolute_url(self):

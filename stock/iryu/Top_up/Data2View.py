@@ -1,19 +1,24 @@
 from stock.models import Item,TopUp
-from django.utils import timezone
+from datetime import datetime
+from django.utils.datetime_safe import datetime
 from account_control.models import UserStart
 
 class data2view:
     def top_up(self,request):
         items = Item.objects.filter(type=3)
-        current_time = timezone.now()
+        save_time = datetime.now()
+        top_up_version=1
+        if TopUp.objects.all().count()>0:
+            top_up_version=TopUp.objects.last().version+1
         for item in items:
             new_top_up = TopUp(
                 item=item,
                 value=request.POST.get(item.name),
                 worker=request.user,
-                date_log=current_time)
+                date_log=save_time,
+                version=top_up_version
+            )
             new_top_up.save()
-            print(new_top_up.item.name,'   volume  ', new_top_up.value)
 
     def edit(self,request,pk):
         if 'DELETE' in request.POST:

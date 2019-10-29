@@ -75,7 +75,9 @@ class Display:
         for top_up in TopUp.objects.filter(date_log__gt=worker.date_log):
             edit_display = DisplayTopUp.objects.get(item=top_up.item,date_log=top_up.date_log)
             edit_display.value=top_up.value
+
             edit_display.save()
+            print(edit_display.value,'  hello')
 
 
 
