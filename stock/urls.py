@@ -23,6 +23,8 @@ urlpatterns=[
     # statement
     path('statement/',statement_views.CreateView,name='create_statement'),
     path('list_income/',statement_views.ListIncomeView,name='list_income'),
-    path('edit_income/<int:pk>/',statement_views.EditIncomeView,name='edit_income')
+    path('edit_income/<int:pk>/',statement_views.EditIncomeView,name='edit_income'),
+    path('list_expense/',statement_views.ListExpenseView,name='list_expense'),
+    path('edit_expense/<int:pk>/',statement_views.EditExpenseView,name='edit_expense'),
 
 ]
