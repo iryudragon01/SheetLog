@@ -21,3 +21,15 @@
 {% endfor %}
 </table>
 {% endif %}
+
+{% if temps %}
+<table class="table table-dark">
+{%for temp in temps %}
+<tr>
+    <td class="col-md-3">{{temp.date_log}}</td>
+    <td class="col-md-1"><center>{{temp.name}}</center></td>
+    <td class="col-md-1"><p class="text-danger"> {{temp.value}}</p></td>
+</tr>
+{% endfor %}
+</table>
+{% endif %}

@@ -56,7 +56,8 @@ class Display:
         content = {'items': zip(items,ListFirst,ListEnd,ListVolume,ListMoney,ListSum),
                    'top_ups': get_top_up,
                    'incomes':statement['incomes'],
-                   'expenses': statement['expenses']
+                   'expenses': statement['expenses'],
+                   'temps' :statement['temps']
 
                    }
         return content

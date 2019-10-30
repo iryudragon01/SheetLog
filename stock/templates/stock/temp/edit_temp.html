@@ -9,7 +9,7 @@
 
 <form action="" method="post">
     {%csrf_token%}
-    <input type="hidden" name="tem_id" value="{{temp_id}}">
+    <input type="hidden" name="temp_id" value="{{temp_id}}">
     <div class="content-grop">
         <label class="form-control-label" name="{{temp.name}}"><h1>{{temp.name}}</h1></label>
     <input name="value" TYPE="number" class="form-control form-control-lg" value="{{temp.value}}" />

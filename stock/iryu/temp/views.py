@@ -2,6 +2,7 @@ from django.shortcuts import redirect,render
 from .create import create
 from account_control.models import UserStart
 from stock.models import TempExpense
+from .create import edit
 
 def CreateView(request):
     content = {}
@@ -29,4 +30,10 @@ def EditView(request,pk):
         return redirect('stock:list_temp')
     else:
         content['temp'] = TempExpense.objects.get(id=pk)
+    if request.POST:
+        result = edit(request)
+        if result == 'updated' or result == 'deleted':
+            return redirect('stock:list_temp')
+        else:
+            content['message'] = result
     return render(request,'stock/temp/edit_temp.html',content)
