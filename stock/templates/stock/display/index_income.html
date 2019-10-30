@@ -1,0 +1,18 @@
+{% if incomes %}
+{%for income in incomes %}
+<div class="row">
+    <div class="col-md-3">{{income.date_log}}</div>
+    <div class="col-md-3">{{income.name}}</div>
+    <div class="col-md-1"><p class="text-success"> {{income.value}}</p></div>
+</div>
+{% endfor %}
+{% endif %}
+{% if expenses %}
+{%for expense in expenses %}
+<div class="row">
+    <div class="col-md-3">{{expense.date_log}}</div>
+    <div class="col-md-3">{{expense.name}}</div>
+    <div class="col-md-1"><p class="text-danger"> {{expense.value}}</p></div>
+</div>
+{% endfor %}
+{% endif %}

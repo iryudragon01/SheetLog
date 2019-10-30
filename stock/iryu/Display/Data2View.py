@@ -4,6 +4,7 @@ from stock.models import Item, LogSheet, TempExpense, TopUp, Income, Expense
 from django.utils import timezone
 from account_control.iryu.user_start_script import User_Start_Handle
 from django.db.models import Sum
+from .function.statement import getstatement
 from datetime import datetime
 
 
@@ -50,17 +51,20 @@ class Display:
             ListMoney.append(item_money(item,sheet_start,sheet_end))
             Sum_temp += item_money(item,sheet_start,sheet_end)
             ListSum.append(Sum_temp)
-
-        get_top_up = self.gettopup(self, worker=worker, top_ups=top_ups,logsheet=log_sheet_starts)
+        statement = getstatement(worker.date_log)
+        get_top_up = self.gettopup(self, top_ups=top_ups,logsheet=log_sheet_starts)
         content = {'items': zip(items,ListFirst,ListEnd,ListVolume,ListMoney,ListSum),
-                   'top_ups': get_top_up
+                   'top_ups': get_top_up,
+                   'incomes':statement['incomes'],
+                   'expenses': statement['expenses']
+
                    }
         return content
 
     #  End get display
 
     # get topup
-    def gettopup(self, worker, top_ups,logsheet):
+    def gettopup(self,  top_ups,logsheet):
 
         ListTop = []
         items = Item.objects.filter(type=3)
