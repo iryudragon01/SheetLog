@@ -1,0 +1,20 @@
+{% extends 'stock/layout.html' %}
+{% block content %}
+{% if temps %}
+<div class="container">
+    {% for temp in temps %}
+        <div class="row">
+            <div class="col-md-3">{{temp.date_log}}</div>
+            <div class="col-md-1">{{temp.name}}</div>
+            <div class="col-md-1">{{temp.value}}</div>
+            <div class="col-md-1"><a href="{% url 'stock:edit_temp' temp.id %}"><button>Edit</button></a> </div>
+        </div>
+    {% endfor %}
+    <div class="row">
+        <div class="col-md-3">
+            <a class="btn btn-success" href="{% url 'stock:create_temp' %}">เพิ่มรายการ</a>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
