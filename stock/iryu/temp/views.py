@@ -24,5 +24,9 @@ def ListView(request):
 
 
 def EditView(request,pk):
-
-    return render(request,'stock/temp/edit_temp.html')
+    content = {'temp_id':pk}
+    if TempExpense.objects.filter(id=pk).count() == 0:
+        return redirect('stock:list_temp')
+    else:
+        content['temp'] = TempExpense.objects.get(id=pk)
+    return render(request,'stock/temp/edit_temp.html',content)
