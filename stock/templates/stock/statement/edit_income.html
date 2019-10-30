@@ -1,0 +1,33 @@
+{% extends 'stock/layout.html'%}
+{%block content%}
+{% if message %}
+<div class="alert alert-danger">{{message}}</div>
+{% endif %}
+{% if income %}
+<div class="container">
+    <div class="col-md-8">
+
+<form action="" method="post">
+    {%csrf_token%}
+    <input  type="hidden" name="income_id" value="{{income.id}}" />
+    <div class="content-grop">
+        <label class="form-control-label" name="{{income.name}}"><h1>{{income.name}}</h1></label>
+    <input name="value" TYPE="number" class="form-control form-control-lg" value="{{income.value}}" />
+    </div>
+    <div class="content-group">
+        <label class="form-control-label" ><H3>Record Date</H3></label>
+        <label class="form-control form-control-lg">{{income.date_log}}</label>
+    </div>
+    <button class="btn btn-success" type="submit" name="update">Update</button>
+
+        <a  class="btn btn-dark" href="{%url 'stock:list_income'%}">Cancel</a>
+    <div class="form-group">
+        <label class="label label-danger">ลบสินค้าออกจาก ฐานข้อมูล</label><br>
+        <input type="submit" name="DELETE" class="btn btn-danger" value="ลบ {{income.name }}">
+    </div>
+</form>
+{% endif %}
+    </div>
+</div>
+
+{%endblock%}

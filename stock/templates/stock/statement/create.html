@@ -1,24 +1,31 @@
 {% extends 'stock/layout.html' %}
 {%block content%}
+{% if message %}
+<div class="alert alert-danger" role="alert">
+  {{message}}
+</div>
+{% endif %}
+<div class="container">
 <form class="form" action="" method="post">
     {% csrf_token %}
     <div class="content-group">
-        <label class="input-control-label">รายการ</label>
-        <input class="input-control input-control-lg" name="name" />
+        <label class="form-control-label">รายการ</label>
+        <input class="form-control form-control-lg" name="name" />
     </div>
     <div class="content-group">
-        <label class="input-control-label">ยอดเงิน</label>
-        <input class="input-control input-control-lg" name="value" />
+        <label class="form-control-label">ยอดเงิน</label>
+        <input class="form-control form-control-lg" type="number" name="value" />
     </div>
     <div class="content-group">
-        <label class="input-control-label">ประเภท</label>
-        <choice class="input-control input-control-lg">
-            <select value="none">ประเภท</select>
-            <select value="1">รายรับ</select>
-            <select value="2">รายจ่าย</select>
-        </choice>
+        <label class="form-control-label">ประเภท</label>
+        <select class="form-control form-control-lg" name="record_type" type="number">
+            <option value="none">ประเภท</option>
+            <option value=1>รายรับ</option>
+            <option value=2>รายจ่าย</option>
+        </select>
     </div>
-
+<button type="submit" >บันทึก</button>
 </form>
+</div>
 
 {% endblock%}

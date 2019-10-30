@@ -21,6 +21,8 @@ urlpatterns=[
     path('topup/edit/<int:pk>',top_up_views.Top_up_Edit_View,name='topup_edit'),
 
     # statement
-    path('statement/',statement_views.CreateView,name='statecreate'),
+    path('statement/',statement_views.CreateView,name='create_statement'),
+    path('list_income/',statement_views.ListIncomeView,name='list_income'),
+    path('edit_income/<int:pk>/',statement_views.EditIncomeView,name='edit_income')
 
 ]
