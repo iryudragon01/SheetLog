@@ -8,7 +8,8 @@
     <td >{{income.name}}</td>
     <td></td><td></td><td></td>
     <td ><p class="text-success"> {{income.value}}</p></td>
-    <td>sum</td>
+    <td>{% if forloop.last %}
+        {{sum_income}} {% endif %}</td>
 </tr>
 {% endfor %}
 {% endif %}
@@ -20,7 +21,8 @@
     <td >{{expense.name}}</td>
     <td></td><td></td><td></td>
     <td ><p class="text-danger"> {{expense.value}}</p></td>
-    <td>sum</td>
+    <td>{% if forloop.last %}
+        {{sum_expense}} {% endif %}</td>
 </tr>
 {% endfor %}
 {% endif %}
@@ -32,7 +34,8 @@
     <td >{{temp.name}}</td>
     <td></td><td></td><td></td>
     <td ><p class="text-danger"> {{temp.value}}</p></td>
-    <td>sum</td>
+    <td>{% if forloop.last %}
+        {{sum_temp}} {% endif %}</td>
 </tr>
 {% endfor %}
 </table>

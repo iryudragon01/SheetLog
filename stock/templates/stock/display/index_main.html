@@ -25,7 +25,8 @@
         <td>{{ item.price }}</td>
         <td>{{ item_sale }}</td>
         <td>{{item_money }}</td>
-        <td>{{ item_sum }}</td>
+    <td>{% if forloop.last %}
+        {{item_sum}} {% endif %}</td>
     </tr>
 {% endfor %}
 

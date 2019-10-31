@@ -76,9 +76,14 @@ class Display:
                    'top_ups': get_top_up,
                    'incomes':statement['incomes'],
                    'expenses': statement['expenses'],
-                   'temps' :statement['temps']
-
+                   'temps':statement['temps'],
                    }
+        Sum_temp = statement['sum_income'] + Sum_temp
+        content['sum_income']=Sum_temp
+        Sum_temp = statement['sum_expense'] + Sum_temp
+        content['sum_expense']=Sum_temp
+        Sum_temp = statement['sum_temp'] + Sum_temp
+        content['sum_temp'] = Sum_temp
         return content
 
     #  End get display

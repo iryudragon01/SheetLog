@@ -11,7 +11,7 @@ def IndexView(request):
         return redirect('account_control:index')
     # if login check if item Exist
     # check if login with admin
-    elif UserStart.objects.filter(username=request.user).count() == 0: 
+    elif UserStart.objects.filter(username=request.user).count() == 0:
         return redirect('account_control:logout')
     else:
         if request.POST:  # if Post Update data
