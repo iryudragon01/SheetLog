@@ -1,0 +1,15 @@
+                {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="btn text-white" href="{% url 'account_control:index' %}">Home usert</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn text-white" href="{% url 'account_control:logout' %}">Logout</a>
+            </li>
+                {% else %}
+            <li>
+                <a class="btn text-white" href="{% url 'account_control:index' %}">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn text-white" href="{% url 'account_control:register' %}">Register</a>
+            </li>
+                {% endif %}

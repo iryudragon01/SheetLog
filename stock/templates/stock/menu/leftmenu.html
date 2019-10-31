@@ -1,6 +1,6 @@
 
         <li class="nav-item">
-            <label  class="btn btn-success dropdown-toggle"  data-toggle="dropdown" > สินค้า </label>
+            <label  class="btn text-white dropdown-toggle"  data-toggle="dropdown" > สินค้า </label>
             <ul class="dropdown-menu">
                 <li><a  href="{% url 'stock:itemlist' %} ">สินค้าทั้งหมด</a></li>
                 <li><a  href="{% url 'stock:itemcreate' %} ">สร้างสินค้า</a></li>
@@ -8,7 +8,7 @@
         </li>
 
         <li class="nav-item">
-            <label  class="btn btn-success dropdown-toggle"  data-toggle="dropdown" > เติม </label>
+            <label  class="btn text-white dropdown-toggle"  data-toggle="dropdown" > เติม </label>
             <ul class="dropdown-menu">
                 <li><a href="{% url 'stock:topup' %}">เติมสินค้า</a></li>
                 <li><a href="{% url 'stock:topup_list' %}">ประวัติการเติม</a></li>
@@ -16,7 +16,7 @@
         </li>
 
         <li class="nav-item">
-            <label  class="btn btn-success dropdown-toggle"  data-toggle="dropdown" > รายรับรายจ่าย </label>
+            <label  class="btn text-white dropdown-toggle"  data-toggle="dropdown" > รายรับรายจ่าย </label>
             <ul class="dropdown-menu">
                 <li><a href="{% url 'stock:create_statement' %}">สร้าง</a></li>
                 <li><a href="{% url 'stock:list_income' %}">Income List</a></li>
@@ -24,7 +24,7 @@
             </ul>
         </li>
         <li class="nav-item">
-            <label  class="btn btn-success dropdown-toggle"  data-toggle="dropdown" > temp </label>
+            <label  class="btn text-white dropdown-toggle"  data-toggle="dropdown" > temp </label>
             <ul class="dropdown-menu">
                 <li><a href="{% url 'stock:create_temp' %}">สร้าง</a></li>
                 <li><a href="{% url 'stock:list_temp' %}">List</a></li>
