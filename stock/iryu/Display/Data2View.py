@@ -41,7 +41,10 @@ class Display:
             if item.type==3:
                 item_top_ups = TopUp.objects.filter(item=item,date_log__gt=worker.date_log).aggregate(Sum('value'))
                 sum_top_up = item_top_ups['value__sum']
-                sheet_start += int(sum_top_up)
+                if sum_top_up:
+                    sheet_start += int(sum_top_up)
+                else:
+                    sheet_start += 0
             ListFirst.append(sheet_start)
             if log_sheet_ends.filter(item=item).count() == 1:
                 sheet_end=log_sheet_ends.get(item=item).value
@@ -66,7 +69,8 @@ class Display:
 
     # get topup
     def gettopup(self,  top_ups,logsheet):
-
+        if not top_ups.last(): # check if top_up is exist ?
+            return []
         ListTop = []
         items = Item.objects.filter(type=3)
         list_row = ['name']
