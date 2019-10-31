@@ -1,11 +1,10 @@
 from stock.iryu.Display.calculater import volume_sale,item_money
 from account_control.models import UserStart
-from stock.models import Item, LogSheet, TempExpense, TopUp, Income, Expense
+from stock.models import Item, LogSheet, TopUp
 from django.utils import timezone
 from account_control.iryu.user_start_script import User_Start_Handle
 from django.db.models import Sum
 from .function.statement import getstatement
-from datetime import datetime
 
 
 class Display:
@@ -37,7 +36,12 @@ class Display:
             sheet_start = 0
             sheet_end = 0
             if log_sheet_starts.filter(item=item).count() == 1:
-                sheet_start = log_sheet_starts.get(item=item).value
+                if item.type == 1:
+                    sheet_start = log_sheet_starts.get(item=item).value
+                if item.type == 2:
+                    sheet_start = 0
+                if item.type ==3:
+                    sheet_start = log_sheet_starts.get(item=item).value
             if item.type==3:
                 item_top_ups = TopUp.objects.filter(item=item,date_log__gt=worker.date_log).aggregate(Sum('value'))
                 sum_top_up = item_top_ups['value__sum']
@@ -46,9 +50,20 @@ class Display:
                 else:
                     sheet_start += 0
             ListFirst.append(sheet_start)
+
             if log_sheet_ends.filter(item=item).count() == 1:
-                sheet_end=log_sheet_ends.get(item=item).value
+                if item.type == 2:
+                    if log_sheet_starts.filter(item=item):
+                        if log_sheet_ends.get(item=item):
+                            sheet_end = log_sheet_ends.get(item=item).value-log_sheet_starts.get(item=item).value
+                    else:
+                        if log_sheet_ends.filter(item=item):
+                            sheet_end=log_sheet_ends.get(item=item).value
+                else:
+                    sheet_end=log_sheet_ends.get(item=item).value
             ListEnd.append(sheet_end)
+
+
             # call function from other file
             ListVolume.append(volume_sale(item,sheet_start,sheet_end))
             ListMoney.append(item_money(item,sheet_start,sheet_end))
