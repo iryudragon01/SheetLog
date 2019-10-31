@@ -80,9 +80,9 @@ class Display:
                    }
         Sum_temp = statement['sum_income'] + Sum_temp
         content['sum_income']=Sum_temp
-        Sum_temp = statement['sum_expense'] + Sum_temp
+        Sum_temp = -statement['sum_expense'] + Sum_temp
         content['sum_expense']=Sum_temp
-        Sum_temp = statement['sum_temp'] + Sum_temp
+        Sum_temp = -statement['sum_temp'] + Sum_temp
         content['sum_temp'] = Sum_temp
         return content
 

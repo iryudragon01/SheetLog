@@ -1,7 +1,7 @@
 {% extends 'stock/layout.html' %}
 {% block content %}
-{% if expenses %}
 <div class="container">
+{% if expenses %}
     {% for expense in expenses %}
         <div class="row">
             <div class="col-md-3">{{expense.date_log}}</div>
@@ -10,11 +10,11 @@
             <div class="col-md-1"><a href="{% url 'stock:edit_expense' expense.id %}"><button>Edit</button></a> </div>
         </div>
     {% endfor %}
+{% endif %}
     <div class="row">
         <div class="col-md-3">
             <a class="btn btn-success" href="{% url 'stock:create_statement' %}">เพิ่มรายการ</a>
         </div>
     </div>
 </div>
-{% endif %}
 {% endblock %}

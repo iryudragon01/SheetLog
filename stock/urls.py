@@ -12,14 +12,14 @@ urlpatterns=[
 
 
     # Item
-    path('item/create/',item_views.CreateView,name='itemcreate'),
-    path('item/list/',item_views.ListView,name='itemlist'),
-    path('item/edit/<int:pk>/',item_views.EditView,name='itemedit'),
+    path('item/create/',item_views.CreateView,name='create_item'),
+    path('item/list/',item_views.ListView,name='list_item'),
+    path('item/edit/<int:pk>/',item_views.EditView,name='edit_item'),
 
     # topup
-    path('topup/',top_up_views.Top_up_View,name='topup'),
-    path('topup/list/',top_up_views.Top_up_List_View,name='topup_list'),
-    path('topup/edit/<int:pk>',top_up_views.Top_up_Edit_View,name='topup_edit'),
+    path('topup/',top_up_views.Top_up_View,name='create_top_up'),
+    path('topup/list/',top_up_views.Top_up_List_View,name='list_top_up'),
+    path('topup/edit/<int:pk>',top_up_views.Top_up_Edit_View,name='edit_top_up'),
 
     # statement
     path('create_statement/',statement_views.CreateView,name='create_statement'),

@@ -1,6 +1,8 @@
 {%extends 'stock/layout.html' %}
 {%block content%}
-<table width="40%">
+
+<table class="table">
+{% if items %}
     <tr>
         <th>name</th><th>id</th><th>price</th><th>type</th><th></th>
     </tr>
@@ -10,10 +12,17 @@
         <td>{{item.price}}</td>
         <td>
             {{item.type}}</td>
-        <th><a href="{% url 'stock:itemedit' item.id %}" >แก้ไข</a></th>
+        <th><a href="{% url 'stock:edit_item' item.id %}" >แก้ไข</a></th>
 
 
     </tr>
 {% endfor %}
+    {% endif %}
+
+    <tr>
+        <td >
+            <a class="btn btn-success" href="{% url 'stock:create_item' %}">เพิ่มรายการ</a>
+        </td>
+    </tr>
 </table>
 {% endblock %}

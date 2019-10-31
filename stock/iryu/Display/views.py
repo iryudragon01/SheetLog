@@ -20,7 +20,7 @@ def IndexView(request):
 
         else:  # login and get view list
             if Item.objects.all().count() == 0:
-                return redirect('stock:itemcreate')  # send to create item
+                return redirect('stock:create_item')  # send to create item
             else:
                 content = Display.getdisplay(Display, request)
                 return render(request, 'stock/display/index.html', content)

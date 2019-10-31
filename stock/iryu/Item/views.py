@@ -26,4 +26,4 @@ def EditView(request, pk=None):
         elif Item.objects.filter(id=pk).count() == 1:
             content = {'item': Item.objects.get(id=pk) }
             return render(request, 'stock/Item/edit.html', content)
-    return redirect('stock:itemlist')
+    return redirect('stock:list_item')

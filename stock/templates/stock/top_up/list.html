@@ -1,20 +1,33 @@
 {%extends 'stock/layout.html' %}
 {%block content%}
-<table width="40%">
-    <tr>
-        <th>name</th><th>id</th><th>version</th><th>value</th><th>date</th><th></th>
+<div class="container">
+    <div class="row">
+    <div class="col-md-8">
+
+<table class="table">
+{% if top_ups %}
+    <tr >
+        <th >name</th>
+        <th>date</th>
+        <th>value</th>
     </tr>
+
 {% for top_up in top_ups %}
-    <tr><th>{{top_up.item.name}}</th>
-        <td>{{top_up.id}}</td>
-        <td>{{top_up.version}}</td>
+    <tr >
+        <td>{{top_up.item.name}}</td>
+        <td>{{top_up.date_log}}</td>
         <td>{{top_up.value}}</td>
-        <td>
-            {{top_up.date_log}}</td>
-        <th><a href="{% url 'stock:topup_edit' top_up.id %}" >แก้ไข</a></th>
-
-
+        <td><a href="{% url 'stock:edit_top_up' top_up.id %}" >แก้ไข</a></td>
     </tr>
 {% endfor %}
+{% endif %}
+    <tr >
+        <td >
+            <a class="btn btn-success" href="{% url 'stock:create_top_up' %}">เพิ่มรายการ</a>
+        </td>
+    </tr>
 </table>
+    </div>
+</div>
+</div>
 {% endblock %}

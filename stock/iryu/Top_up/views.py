@@ -7,8 +7,8 @@ def Top_up_View(request):
     content = {'items': Item.objects.filter(type=3)}
     if request.POST:
         data2view.top_up(data2view,request)
-        return redirect('stock:topup_list')
-    return render(request, 'stock/top_up/top_up.html', content)
+        return redirect('stock:list_top_up')
+    return render(request, 'stock/top_up/create.html', content)
 
 
 def Top_up_List_View(request):
@@ -23,4 +23,4 @@ def Top_up_Edit_View(request,pk):
         else:
             content = {'top_up': TopUp.objects.get(id=pk)}
             return render(request, 'stock/top_up/edit.html', content)
-    return redirect('stock:topup_list')
+    return redirect('stock:list_top_up')
