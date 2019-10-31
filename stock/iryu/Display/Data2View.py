@@ -90,8 +90,6 @@ class Display:
 
     # get topup
     def gettopup(self,  top_ups,logsheet):
-        if not top_ups.last(): # check if top_up is exist ?
-            return []
         ListTop = []
         items = Item.objects.filter(type=3)
         list_row = ['name']
@@ -105,6 +103,8 @@ class Display:
                 sheet = logsheet.get(item=getvalue).value
             list_sheet.append(sheet)
         ListTop.append(list_sheet)
+        if not top_ups.last():    # check if top_up is exist ?
+            return ListTop
 
         top_last=top_ups.last().version
 

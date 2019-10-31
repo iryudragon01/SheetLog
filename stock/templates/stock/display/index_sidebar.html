@@ -11,7 +11,15 @@
             {% else %}
                         <tr>
                     {% for fill in top_up %}
-                        <td>{{fill}}</td>
+                            {% if forloop.first %}
+                                {% ifequal fill 'date' %}
+                            <th>สต๊อกเก่า</th>
+                                {% else %}
+                                    <th>{{fill.day}}/{{fill.month}}</th>
+                                {% endifequal %}
+                            {% else %}
+                                <td>{{fill}}</td>
+                            {% endif %}
                     {% endfor %}
                         </tr>
             {% endifequal %}
