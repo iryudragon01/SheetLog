@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from stock.models import Item,TopUp
 from stock.iryu.Top_up.Data2View import data2view
+from account_control.iryu.script import is_superior
 
 
 def Top_up_View(request):
@@ -17,7 +18,9 @@ def Top_up_List_View(request):
 
 
 def Top_up_Edit_View(request,pk):
-    if TopUp.objects.filter(id=pk).count()==1:
+    if not is_superior(request):
+        return redirect('account_control:permit_denied')
+    if TopUp.objects.filter(id=pk).count() == 1:
         if request.POST:
             data2view.edit(data2view,request,pk)
         else:

@@ -1,9 +1,12 @@
 from django.shortcuts import render, redirect
 from stock.models import Item
 from stock.iryu.Item.Data2View import data2view
+from account_control.iryu.script import is_superior
 
 
 def CreateView(request):
+    if not is_superior(request):
+        return redirect('account_control:permit_denied')
     content = {}
     if request.method == 'POST':
         makenewitem = data2view.create(data2view, request)
@@ -20,6 +23,8 @@ def ListView(request):
 
 
 def EditView(request, pk=None):
+    if not is_superior(request):
+        return redirect('account_control:permit_denied')
     if id is not None:
         if request.POST:
             data2view.edit(data2view,request, pk)
