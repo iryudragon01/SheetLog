@@ -1,11 +1,10 @@
-from stock.iryu.Display.calculater import volume_sale,item_money
+from stock.iryu.Display.function.calculater import volume_sale,item_money
 from account_control.models import UserStart
 from stock.models import Item, LogSheet, TopUp
 from django.utils import timezone
-from account_control.iryu.user_start_script import User_Start_Handle
+from account_control.iryu.script import user_superior
 from django.db.models import Sum
 from .function.statement import getstatement
-from django.shortcuts import redirect
 
 
 class Display:
@@ -72,11 +71,16 @@ class Display:
             ListSum.append(Sum_temp)
         statement = getstatement(worker.date_log)
         get_top_up = self.gettopup(self, top_ups=top_ups,logsheet=log_sheet_starts)
+        is_display_reset = '0'
+        if worker.user_superior == 1:
+            is_display_reset = '1'
+
         content = {'items': zip(items,ListFirst,ListEnd,ListVolume,ListMoney,ListSum),
                    'top_ups': get_top_up,
-                   'incomes':statement['incomes'],
+                   'incomes': statement['incomes'],
                    'expenses': statement['expenses'],
-                   'temps':statement['temps'],
+                   'temps': statement['temps'],
+                   'is_Display_reset': is_display_reset,
                    }
         Sum_temp = statement['sum_income'] + Sum_temp
         content['sum_income']=Sum_temp
@@ -84,6 +88,7 @@ class Display:
         content['sum_expense']=Sum_temp
         Sum_temp = -statement['sum_temp'] + Sum_temp
         content['sum_temp'] = Sum_temp
+
         return content
 
     #  End get display
@@ -134,5 +139,5 @@ class Display:
                                      date_log=current_time)
             new_log_sheet.save()
 
-        User_Start_Handle.user_superior(User_Start_Handle, request)  # update account_manager start
+        user_superior(request)  # update account_manager start
         return self.getdisplay(self, request)

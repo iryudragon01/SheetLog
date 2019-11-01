@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.utils import timezone
 from .models import UserStart
 from stock.models import LogSheet
-from account_control.iryu.user_start_script import User_Start_Handle
+from account_control.iryu.script import user_superior,edit_user_start
 
 
 # Create your views here.
@@ -28,7 +28,7 @@ def RegisterView(request):
             new_user = UserStart(username=username, date_log=timezone.now(), version_log=log_sheet_version)
             new_user.save()
             update_user=UserStart.objects.get(username=username)
-            User_Start_Handle.edit_user_start(User_Start_Handle,update_user)
+            edit_user_start(update_user)
             return redirect('account_control:index')
         else:
             content['registration_form'] = form
@@ -68,3 +68,8 @@ def LoginView(request):
 def LogoutView(request):
     logout(request)
     return redirect('account_control:index')
+
+def ResetIndexView(request):
+    if UserStart.objects.get(username=request.user).user_superior==1:
+        user_superior(request,hard_mode=1)
+    return redirect('stock:index')
