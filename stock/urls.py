@@ -1,10 +1,10 @@
 from django.urls import  path
 from . import views
-from stock.iryu.Item import views as item_views
-from stock.iryu.Top_up import views as top_up_views
-from stock.iryu.Display import views as display_views
-from stock.iryu.statement import views as statement_views
-from stock.iryu.temp import views as temp_views
+from stock.scripts.Item import views as item_views
+from stock.scripts.Top_up import views as top_up_views
+from stock.scripts.display import views as display_views
+from stock.scripts.statement import views as statement_views
+from stock.scripts.temp import views as temp_views
 app_name='stock'
 urlpatterns=[
     # Display

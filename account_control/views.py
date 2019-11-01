@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.utils import timezone
 from .models import UserStart
 from stock.models import LogSheet
-from account_control.iryu.script import user_superior, edit_user_start,is_superior
+from account_control.scripts.script import user_superior, edit_user_start,is_superior
 
 
 # Create your views here.

@@ -2,7 +2,9 @@ from django.shortcuts import render,redirect
 from stock.models import Income,Expense
 from account_control.models import UserStart
 from .create import create,edit,editexpense
-from account_control.iryu.script import is_superior
+from account_control.scripts.script import is_superior
+
+
 def CreateView(request):
     if request.POST:
         result = create(request)
@@ -13,6 +15,7 @@ def CreateView(request):
         else:
             return render(request,'stock/statement/create.html',result)
     return render(request,'stock/statement/create.html')
+
 
 def ListIncomeView(request):
     worker = UserStart.objects.get(username=request.user)
@@ -42,6 +45,7 @@ def EditIncomeView(request,pk):
         else:
             content['message'] = result
     return render(request,'stock/statement/edit_income.html',content)
+
 
 def EditExpenseView(request,pk):
     if not is_superior(request):
