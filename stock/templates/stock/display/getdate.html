@@ -2,10 +2,28 @@
 <div class="row bg-dark text-white">
     <table class="container" id="getdate"  style="display:none" >
   <tr >
-    <th ><input type="text" id="datepicker1" class="datepicker1 bg-dark text-white"></th>
-    <th ><input type="text" id="endlistdate" class="datepicker1 bg-dark text-white"></th>
+    <th ><input type="text" id="startdate" class="datepicker1 bg-dark text-white"></th>
+    <th ><input type="text" id="enddate" class="datepicker1 bg-dark text-white"></th>
  <th><button class="btn bg-dark text-white">click me</button></th>
+ <th><button class="btn bg-dark text-white" onclick="showgetdate()">Cancel</button></th>
   </tr>
 
 </table>
+    <script>
+
+function showgetdate() {
+  element=document.getElementById("getdate")
+  if(element.style.display=="none"){
+  element.style.display="block";
+  }
+  else{
+  element.style.display="none";
+  }
+}
+function submitgetdate(){
+
+
+}
+
+    </script>
 </div>
