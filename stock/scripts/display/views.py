@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from stock.models import Item
 from account_control.models import UserStart
-from .Data2View import setdisplay,getdisplay
+from . import Data2View
 
 
 # Create your views here.
@@ -14,12 +14,12 @@ def IndexView(request):
         return redirect('account_control:logout')
     else:
         if request.POST:  # if Post Update data
-            content = setdisplay(request)
+            content = Data2View.setdisplay(request)
             return render(request,'stock/display/index.html',content)
 
         else:  # login and get view list
             if Item.objects.all().count() == 0:
                 return redirect('stock:create_item')  # send to create item
             else:
-                content = getdisplay( request)
+                content = Data2View.getdisplay(request)
                 return render(request, 'stock/display/index.html', content)
