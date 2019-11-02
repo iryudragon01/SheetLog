@@ -17,10 +17,9 @@
         <th>{{item.name}}</th>
         <td>{{item_start}}</td>
         <td>
-            <a id="label_{{forloop.counter}}" type="label"
-               onclick="input_display('{{forloop.counter}}')">{{item_end}}</a>
             <input name="{{item.name}}" id="input_{{forloop.counter}}"  value="{{item_end}}"
-                   class="bg-dark text-white" style="display:none;"  />
+                   onchange="change_input({{forloop.counter}})"
+                   class="bg-dark text-white" />
         </td>
         <td>{{ item.price }}</td>
         <td>{{ item_sale }}</td>

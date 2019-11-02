@@ -21,39 +21,11 @@
                 </div>
               </div>
             </div>
-<input id="tempdata" />
 {% endblock content %}
 
 
 {% block script %}
 <script>
-storage=''
-const node1 = document.getElementById('input_1')
-node1.addEventListener("keydown", function(event) {
-    if (event.key === "Enter") {
-        event.preventDefault();
-        finish_input(1,storage)
-        // Do more work
-    }
-    else{
-    storage +=event.key
-    }
-});
-const node2 = document.getElementById('input_1')
-node2.addEventListener("keydown", function(event) {
-    if (event.key === "Enter") {
-        event.preventDefault();
-        finish_input(2,storage)
-        // Do more work
-    }
-    else{
-    storage +=event.key
-    }
-});
-
-
-
-
 function showgetdate() {
   element=document.getElementById("getdate")
   if(element.style.display=="none"){
@@ -62,29 +34,6 @@ function showgetdate() {
   else{
   element.style.display="none";
   }
-}
-
-function input_display(id){
-edit=true
-input_item = document.getElementById('input_'+id)
-label_item = document.getElementById('label_'+id)
-input_item.value=eval(label_item.innerHTML)
-input_item.style.display='block';
-input_item.select()
-label_item.style.display='none';
-
-}
-
-function finish_input(id,value){
-input_item = document.getElementById('input_'+id)
-label_item = document.getElementById('label_'+id)
-label_item.innerHTML=value
-input_item.value=value
-label_item.style.display='block';
-input_item.style.display='none';
-nextid=eval(id)+1
-storage = ''
-input_display(nextid)
 }
 
 </script>

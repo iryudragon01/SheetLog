@@ -3,7 +3,7 @@ from stock.models import Item, DateTimeTemplate
 from account_control.models import UserStart
 from . import Data2View
 from datetime import datetime
-from django.views.generic import CreateView
+from stock.forms import InputTest
 
 
 def IndexView(request):
@@ -27,12 +27,9 @@ def IndexView(request):
                 return render(request, 'stock/display/index.html', content)
 
 
-class getDateTimeView(CreateView):
-    model = DateTimeTemplate
-    fields = ['date', 'time']
-    template_name = 'stock/display/getdate.html'
-
-    def form_valid(self, form):
-        print('hello',form.cleaned_data)
-
-        return redirect('stock:getenddate')
+def getDateView(request):
+    form = InputTest()
+    content = {
+        'form': form
+    }
+    return render(request,'stock/display/getdate.html',content)

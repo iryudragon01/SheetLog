@@ -10,7 +10,7 @@ app_name='stock'
 urlpatterns=[
     # Display
     path('',display_views.IndexView,name='index'),
-    path('getenddate/',display_views.getDateTimeView.as_view(),name='getenddate'),
+    path('getenddate/',display_views.getDateView,name='getenddate'),
 
 
     # Item
