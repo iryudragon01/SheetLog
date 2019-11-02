@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from datetime import datetime
 
 
 # Create your models here.
@@ -50,3 +51,11 @@ class TempExpense(models.Model):
     value = models.PositiveIntegerField()
     date_log = models.DateTimeField()
 
+
+# create model for template form
+class DateTimeTemplate(models.Model):
+    date = models.DateField(default=datetime.now())
+    time = models.TimeField(default=datetime.now())
+
+    def get_absolute_url(self):
+        return reverse('stock:getenddate',kwargs={'id': self.id})

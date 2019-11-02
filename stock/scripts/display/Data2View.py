@@ -7,7 +7,7 @@ from django.db.models import Sum
 from .function.statement import getstatement
 
 
-def getdisplay(request):
+def getdisplay(request, end_retrieve=timezone.now()):
     ListFirst = []
     ListEnd = []
     ListVolume = []
@@ -27,7 +27,9 @@ def getdisplay(request):
     # retrieve data from log sheet
     worker = UserStart.objects.get(username=request.user)
     log_sheet_starts = LogSheet.objects.filter(version=worker.version_log)
-    log_sheet_ends = LogSheet.objects.filter(version=LogSheet.objects.last().version)
+
+    log_sheet_ends = LogSheet.objects.filter(
+        version=LogSheet.objects.filter(date_log__lt=end_retrieve).last().version)
     top_ups = TopUp.objects.filter(date_log__gt=worker.date_log)
     items = Item.objects.all()
 
@@ -140,5 +142,3 @@ def setdisplay(request):
 
     user_superior(request)  # update account_manager start
     return getdisplay(request)
-
-    

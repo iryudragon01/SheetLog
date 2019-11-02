@@ -5,10 +5,12 @@ from stock.scripts.Top_up import views as top_up_views
 from stock.scripts.display import views as display_views
 from stock.scripts.statement import views as statement_views
 from stock.scripts.temp import views as temp_views
+from datetime import datetime
 app_name='stock'
 urlpatterns=[
     # Display
     path('',display_views.IndexView,name='index'),
+    path('getenddate/',display_views.getDateTimeView.as_view(),name='getenddate'),
 
 
     # Item
