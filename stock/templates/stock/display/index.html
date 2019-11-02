@@ -1,6 +1,14 @@
 {% extends "stock/layout.html"%}
 
 {%block content%}
+<div class="row">
+    <div class="container" id="getdate"  style="display:none;">
+  <div class="row">
+    <div class="col-sm-3">Start date<input type="text" id="starlistdate" class="datepicker1"></div>
+    <div class="col-sm-3">End date<input type="text" id="endlistdate" class="datepicker1"></div>
+  </div>
+</div>
+</div>
             <div class="row">
               <div class="col-md-6">
                     {% include 'stock/display/index_main.html' %}
@@ -13,33 +21,71 @@
                 </div>
               </div>
             </div>
+<input id="tempdata" />
 {% endblock content %}
 
 
 {% block script %}
 <script>
-function input_manager(id_item)
-{
-document.getElementById('input_'+id_item).value=document.getElementById('label_'+id_item).innerHTML
-document.getElementById('input_'+id_item).type="text"
-document.getElementById('input_'+id_item).focus()
-document.getElementById('input_'+id_item).select()
-document.getElementById('label_'+id_item).type="hidden"
-}
-function input_change(id_item,type_call){
+storage=''
+const node1 = document.getElementById('input_1')
+node1.addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        finish_input(1,storage)
+        // Do more work
+    }
+    else{
+    storage +=event.key
+    }
+});
+const node2 = document.getElementById('input_1')
+node2.addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        finish_input(2,storage)
+        // Do more work
+    }
+    else{
+    storage +=event.key
+    }
+});
 
-document.getElementById('input_'+id_item).type="hidden"
-document.getElementById('label_'+id_item).innerHTML=eval(document.getElementById('input_'+id_item).value)
-document.getElementById('label_'+id_item).type="label"
-if(type_call=='enter'){
-input_manager(eval(id_item)+1)
-}
+
+
+
+function showgetdate() {
+  element=document.getElementById("getdate")
+  if(element.style.display=="none"){
+  element.style.display="block";
+  }
+  else{
+  element.style.display="none";
+  }
 }
 
-function submit()
-{
-document.getElementById('submit').type="submit"
-document.getElementById('submit').click()
+function input_display(id){
+edit=true
+input_item = document.getElementById('input_'+id)
+label_item = document.getElementById('label_'+id)
+input_item.value=eval(label_item.innerHTML)
+input_item.style.display='block';
+input_item.select()
+label_item.style.display='none';
+
 }
+
+function finish_input(id,value){
+input_item = document.getElementById('input_'+id)
+label_item = document.getElementById('label_'+id)
+label_item.innerHTML=value
+input_item.value=value
+label_item.style.display='block';
+input_item.style.display='none';
+nextid=eval(id)+1
+storage = ''
+input_display(nextid)
+}
+
 </script>
 {% endblock script %}

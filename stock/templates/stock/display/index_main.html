@@ -17,10 +17,10 @@
         <th>{{item.name}}</th>
         <td>{{item_start}}</td>
         <td>
-            <a id="label_{{forloop.counter}}" type="label" onclick="input_manager('{{forloop.counter}}')">{{item_end}}</a>
+            <a id="label_{{forloop.counter}}" type="label"
+               onclick="input_display('{{forloop.counter}}')">{{item_end}}</a>
             <input name="{{item.name}}" id="input_{{forloop.counter}}"  value="{{item_end}}"
-                   type="hidden" onchange="input_change('{{forloop.counter}}','enter')" onfocusout="input_change('{{forloop.counter}}','offfocus')"/>
-
+                   class="bg-dark text-white" style="display:none;"  />
         </td>
         <td>{{ item.price }}</td>
         <td>{{ item_sale }}</td>

@@ -4,8 +4,11 @@
         <li>
             <a class="btn text-white" href="{% url 'account_control:reset_index' %}">Reset Data</a>
         </li>
+
     {% endifequal %}
-{% else %}
+        <li>
+            <a onclick="showgetdate()" class="btn text-white">getdate</a>
+        </li>
 {% endif %}
 
 
