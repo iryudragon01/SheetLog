@@ -1,13 +1,8 @@
 {% extends "stock/layout.html"%}
 
 {%block content%}
-<div class="row">
-    <div class="container" id="getdate"  style="display:none;">
-  <div class="row">
-    <div class="col-sm-3">Start date<input type="text" id="starlistdate" class="datepicker1"></div>
-    <div class="col-sm-3">End date<input type="text" id="endlistdate" class="datepicker1"></div>
-  </div>
-</div>
+{% include 'stock/display/getdate.html' %}
+
 </div>
             <div class="row">
               <div class="col-md-6">
@@ -25,6 +20,7 @@
 
 
 {% block script %}
+
 <script>
 function showgetdate() {
   element=document.getElementById("getdate")
