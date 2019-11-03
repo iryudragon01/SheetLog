@@ -28,7 +28,7 @@ def getdisplay(log_sheets_start,log_sheets_end,date_statement_end):
             if item.type == 3:
                 sheet_start = log_sheets_start.get(item=item).value
         if item.type == 3:
-            item_top_ups = top_ups.objects.filter(item=item,).aggregate(Sum('value'))
+            item_top_ups = top_ups.filter(item=item).aggregate(Sum('value'))
             sum_top_up = item_top_ups['value__sum']
             if sum_top_up:
                 sheet_start += int(sum_top_up)
