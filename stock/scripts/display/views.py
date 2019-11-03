@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
-from stock.models import Item, DateTimeTemplate
+from stock.models import Item
 from account_control.models import UserStart
 from . import Data2View
+from .function import calculater
 from datetime import datetime
 from stock.forms import InputTest
 
@@ -23,7 +24,7 @@ def IndexView(request):
             if Item.objects.all().count() == 0:
                 return redirect('stock:create_item')  # send to create item
             else:
-                content = Data2View.getdisplay(request, end_retrieve)
+                content = calculater.normal_get_log(request)
                 return render(request, 'stock/display/index.html', content)
 
 
@@ -32,4 +33,12 @@ def getDateView(request):
     content = {
         'form': form
     }
+
+    if request.POST:
+        result = calculater.text2date(request)
+        if result is not 'fail':
+            content = result
+            return render(request,'stock/display/index.html',content)
+        else:
+            content['errors']=result
     return render(request,'stock/display/getdate.html',content)

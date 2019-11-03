@@ -25,19 +25,73 @@
 
   </head>
   <body>
+<form class="form" action="" method="post">
+  {% csrf_token %}
+      <div class="container">
+    <div class="row">
+         <div class="col-sm-4">
+            <div class="form-group">
+                <div class="input-group date" id="datetimepicker_start" data-target-input="nearest">
+                    <input type="text"  name="startdate" class="form-control datetimepicker-input" data-target="#datetimepicker_start"/>
+                    <div class="input-group-append" data-target="#datetimepicker_start" data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    </div>
+                </div>
+            </div></div>
 
-    <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-      <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"/>
-      <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
-        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+
+         <div class="col-sm-4">
+            <div class="form-group">
+                <div class="input-group date" id="datetimepicker_end" data-target-input="nearest">
+                    <input type="text" name="enddate" class="form-control datetimepicker-input" data-target="#datetimepicker_end"/>
+                    <div class="input-group-append" data-target="#datetimepicker_end" data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    </div>
+                </div>
+            </div>
+         </div>
+
+      <div class="col-sm-4">
+        <div class="form-group">
+          <input class="btn btn-dark text-white" type="submit" value="ok">
+        </div>
       </div>
+
+
+
     </div>
+      </div>
+        <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker_start').datetimepicker({
+                    defaultDate: "11/1/2019",
+                    disabledDates: [
+                        moment("12/25/2019"),
+                        new Date(2019, 11 - 1, 21),
+                        "11/22/2019 00:53"
+                    ]
+                });
+            });
+            $(function () {
+                $('#datetimepicker_end').datetimepicker({
+                    defaultDate: "11/1/2019",
+                    disabledDates: [
+                        moment("12/25/2019"),
+                        new Date(2019, 11 - 1, 21),
+                        "11/22/2019 00:53"
+                    ]
+                });
+            });
+        </script>
+</form>
 
-    <script>
-      $(function () {
-        $("#datetimepicker1").datetimepicker();
-      });
-    </script>
 
+
+  {% if logs %}
+    {% for log in logs %}
+      <p>{{log.date_log}}</p>
+    {% endfor %}
+
+  {% endif %}
   </body>
 </html>

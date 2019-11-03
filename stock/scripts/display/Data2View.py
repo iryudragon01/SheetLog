@@ -7,7 +7,12 @@ from django.db.models import Sum
 from .function.statement import getstatement
 
 
-def getdisplay(request, end_retrieve=timezone.now()):
+
+
+
+
+# mode normal and history
+def getdisplay(request, end_retrieve=timezone.now(),mode='normal'):
     ListFirst = []
     ListEnd = []
     ListVolume = []
