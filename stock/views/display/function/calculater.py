@@ -29,7 +29,10 @@ def text2date(request):
     if end_date>start_date:
         log_sheets_start = LogSheet.objects.filter(version=start_log)
         log_sheets_end = LogSheet.objects.filter(version=end_log)
-        return data2view.getdisplay(log_sheets_start,log_sheets_end,end_date)
+        content = data2view.getdisplay(log_sheets_start,log_sheets_end,end_date)
+        content['start_date']=start_date.strftime('%m/%d/%Y %I:%M %p')
+        content['end_date'] = end_date.strftime('%m/%d/%Y %I:%M %p')
+        return content
     else:
         return 'fail'
 
@@ -41,5 +44,4 @@ def normal_get_log(request):
         version=LogSheet.objects.filter(date_log__lt=timezone.now()).last().version)
     end_statement_date = timezone.now()
     return data2view.getdisplay(log_sheets_start,log_sheets_end,end_statement_date)
-
 
