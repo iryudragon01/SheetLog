@@ -35,17 +35,18 @@ def edit_user_start(user_row):
 
 def account_permit(request):
     if not request.user.is_authenticated:
-        return redirect('account_control:index')
+        return False
     # if login check if item Exist
     # check if login with admin
     elif UserStart.objects.filter(username=request.user).count() == 0:
-        return redirect('account_control:logout')
+        return False
     worker = UserStart.objects.get(username=request.user)
     ten_minutes = timedelta(minutes=15)
     time_now = timezone.now()
+    print('time now',time_now,'time delta',ten_minutes,'time last login',worker.last_login)
     if worker.last_login+ten_minutes > time_now:
         worker.last_login=time_now
         worker.save()
-        return
+        return True
     else:
-        return redirect('account_control:logout')
+        return False

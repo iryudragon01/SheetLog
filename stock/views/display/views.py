@@ -8,7 +8,8 @@ from account_control.scripts import script
 
 
 def IndexView(request):
-    script.account_permit(request)    # check user permit before do other thing
+    if not script.account_permit(request):  # check user permit before do other thing
+        return redirect('account_control:logout')
     if request.POST:  # if Post Update data
         if 'startdate' in request.POST:
             content = calculater.text2date(request)

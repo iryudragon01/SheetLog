@@ -53,6 +53,9 @@ def LoginView(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
+            update_user = UserStart.objects.get(username=username)
+            update_user.last_login = timezone.now()
+            update_user.save()
             return redirect('stock:index')
         else:
             form = AuthenticationForm(request.POST)
