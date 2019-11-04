@@ -3,12 +3,12 @@ from stock.models import Item
 from account_control.models import UserStart
 from . import Data2View
 from .function import calculater
-from datetime import datetime
 from stock.forms import InputTest
+from django.utils import timezone
 
 
 def IndexView(request):
-    end_retrieve = datetime.now()
+    end_retrieve = timezone.now()
     if not request.user.is_authenticated:
         return redirect('account_control:index')
     # if login check if item Exist
@@ -29,10 +29,12 @@ def IndexView(request):
 
 
 def getDateView(request):
-    form = InputTest()
-    content = {
-        'form': form
-    }
+    content = {}
+    if request.user.is_authenticated:
+        worker = UserStart.objects.get(username=request.user)
+        content['start_date'] = worker.date_log.strftime('%m/%d/%Y %I:%M %p')
+        content['end_date'] = timezone.localtime(timezone.now()).strftime('%m/%d/%Y %I:%M %p')
+        print(timezone.localtime(timezone.now()),'timezone now')
 
     if request.POST:
         result = calculater.text2date(request)
@@ -40,5 +42,5 @@ def getDateView(request):
             content = result
             return render(request,'stock/display/index.html',content)
         else:
-            content['errors']=result
+            content['errors'] = result
     return render(request,'stock/display/getdate.html',content)

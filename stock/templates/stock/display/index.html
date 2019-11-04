@@ -1,6 +1,8 @@
 {% extends "stock/layout.html"%}
 
 {%block content%}
+<div id="date_block" style="display:block">
+{% include 'stock/display/getdate.html' %}
 
 </div>
             <div class="row">
@@ -21,5 +23,18 @@
 {% block script %}
 
 <script>
+    function getdate(){
+
+        getdate = document.getElementById('get_block')
+        //alert(getdate.style.display)
+        if(getdate.style.display=="none"){
+            alert('a')
+            getdate.style.display="block";
+        }else{
+            alert('b')
+            getdate..style.display="none";
+            }
+            alert('c');
+     }
 </script>
 {% endblock script %}

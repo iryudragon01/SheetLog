@@ -1,4 +1,4 @@
-from stock.scripts.display.function.calculater import volume_sale, item_money
+from stock.views.display.function.calculater import volume_sale, item_money
 from account_control.models import UserStart
 from stock.models import Item, LogSheet, TopUp
 from django.utils import timezone

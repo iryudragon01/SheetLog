@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from stock.models import Item
-from stock.scripts.Item.Data2View import create,edit
+from stock.views.Item.Data2View import create,edit
 from account_control.scripts.script import is_superior
 
 
