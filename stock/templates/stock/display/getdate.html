@@ -16,6 +16,7 @@
     <div class="row">
         <div class="col-sm-4">
             <form action="" method="post">
+                {% csrf_token %}
         <table><tr>
         <th class="text-white">start:</th><th><input  type="button" class="form-control datetimepicker-input" id="startdate" data-toggle="datetimepicker" data-target="#startdate"/>
        </th>

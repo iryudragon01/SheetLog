@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
 from stock.models import Item
 from stock.views.Item.Data2View import create,edit
-from account_control.scripts.script import is_superior
+from account_control.scripts.script import is_superior,account_permit
 
 
 def CreateView(request):
+    account_permit(request)
     if not is_superior(request):
         return redirect('account_control:permit_denied')
     content = {}
@@ -15,6 +16,7 @@ def CreateView(request):
 
 
 def ListView(request):
+    account_permit(request)
     content = {
         'items': Item.objects.all()
     }
@@ -23,6 +25,7 @@ def ListView(request):
 
 
 def EditView(request, pk=None):
+    account_permit(request)
     if not is_superior(request):
         return redirect('account_control:permit_denied')
     if id is not None:
