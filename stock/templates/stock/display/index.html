@@ -1,7 +1,7 @@
 {% extends "stock/layout.html"%}
 
 {%block content%}
-<div id="date_block" style="display:block">
+<div id="date_block" style="display:none">
 {% include 'stock/display/getdate.html' %}
 
 </div>
@@ -23,18 +23,15 @@
 {% block script %}
 
 <script>
-    function getdate(){
 
-        getdate = document.getElementById('get_block')
-        //alert(getdate.style.display)
-        if(getdate.style.display=="none"){
-            alert('a')
-            getdate.style.display="block";
+    function getdate(){
+        get_date=document.getElementById('date_block')
+        if (get_date.style.display=="block"){
+          get_date.style.display = "none"
         }else{
-            alert('b')
-            getdate..style.display="none";
-            }
-            alert('c');
+          get_date.style.display = "block"
+        }
+        
      }
 </script>
 {% endblock script %}
