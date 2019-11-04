@@ -15,34 +15,44 @@
 <div class="container" id="date_block" style="display:none">
     <div class="row">
         <div class="col-sm-4">
+            <form action="" method="post">
         <table><tr>
-        <th>start:</th><th><input  type="button" class="form-control datetimepicker-input" id="datetimepicker5" data-toggle="datetimepicker" data-target="#datetimepicker5"/>
+        <th class="text-white">start:</th><th><input  type="button" class="form-control datetimepicker-input" id="startdate" data-toggle="datetimepicker" data-target="#startdate"/>
        </th>
-       <th>end:</th><th><input type="button" class="form-control datetimepicker-input" id="datetimepicker4" data-toggle="datetimepicker" data-target="#datetimepicker4"/>
+       <th class="text-white">end:</th><th><input type="button" class="form-control datetimepicker-input" id="enddate" data-toggle="datetimepicker" data-target="#enddate"/>
         </th>
+            <th><input class="btn btn-success" type="submit" value="get Data" /></th>
+
         </tr>
         </table>
+            </form>
         </div>
+    </div>
+</div>
+
+<div class="container bg-dark text-white" id="date_display">
+    <input class="btn text-white" type="button" value="{{start_date}}">
+
+</div>
+
+
+
         <script type="text/javascript">
             $(function () {
-                $('#datetimepicker5').datetimepicker({
+                $('#startdate').datetimepicker({
                     defaultdate:"{{start_date}}",
                     minDate: "{{start_date}}",
                     maxDate: "{{end_date}}"
                 });
             });
             $(function () {
-                $('#datetimepicker4').datetimepicker({
+                $('#enddate').datetimepicker({
                     defaultdate:"{{end_date}}",
                     minDate: "{{start_date}}",
                     maxDate: "{{end_date}}"
                 });
             });
         </script>
-    </div>
-</div>
-      
-
 
 
        

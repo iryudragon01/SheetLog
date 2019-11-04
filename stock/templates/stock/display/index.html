@@ -1,7 +1,7 @@
 {% extends "stock/layout.html"%}
 
 {%block content%}
-<div id="date_block_holder" >
+<div id="date_block_holder" class="bg-dark" >
 {% include 'stock/display/getdate.html' %}
 
 </div>
@@ -26,10 +26,13 @@
 
     function getdate(){
         get_date=document.getElementById('date_block')
+        display_date=document.getElementById('date_display')
         if (get_date.style.display=="block"){
           get_date.style.display = "none"
+          display_date.style.display = "block"
         }else{
           get_date.style.display = "block"
+          display_date.style.display="none"
         }
         
      }
