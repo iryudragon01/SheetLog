@@ -1,12 +1,4 @@
 
-
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Static Example</title>
-
     <!-- Bootstrap 4 -->
 
     <!-- Font Awesome -->
@@ -19,56 +11,38 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/css/tempusdominus-bootstrap-4.min.css" integrity="sha256-XPTBwC3SBoWHSmKasAk01c08M6sIA5gF5+sRxqak2Qs=" crossorigin="anonymous" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/js/tempusdominus-bootstrap-4.min.js" integrity="sha256-z0oKYg6xiLq3yJGsp/LsY9XykbweQlHl42jHv2XTBz4=" crossorigin="anonymous"></script>
 
-  </head>
-  <body>
-<form class="form" action="" method="post">
-  {% csrf_token %}
-      <div class="container">
+
+<div class="container" id="date_block" style="display:none">
     <div class="row">
-         <div class="col-sm-4">
-            <div class="form-group">
-                <div class="input-group date" id="datetimepicker_start" data-target-input="nearest">
-                    <input  type="text"  name="startdate" class="form-control datetimepicker-input" data-target="#datetimepicker_start"/>
-                    <div class="input-group-append" data-target="#datetimepicker_start" data-toggle="datetimepicker">
-                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                    </div>
-                </div>
-            </div></div>
-
-
-         <div class="col-sm-4">
-            <div class="form-group">
-                <div class="input-group date" id="datetimepicker_end" data-target-input="nearest">
-                    <input type="text" name="enddate" class="form-control datetimepicker-input" data-target="#datetimepicker_end"/>
-                    <div class="input-group-append" data-target="#datetimepicker_end" data-toggle="datetimepicker">
-                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                    </div>
-                </div>
-            </div>
-         </div>
-
-      <div class="col-sm-4">
-        <div class="form-group">
-          <input class="btn btn-dark text-white" type="submit" value="ok">
+        <div class="col-sm-4">
+        <table><tr>
+        <th>start:</th><th><input  type="button" class="form-control datetimepicker-input" id="datetimepicker5" data-toggle="datetimepicker" data-target="#datetimepicker5"/>
+       </th>
+       <th>end:</th><th><input type="button" class="form-control datetimepicker-input" id="datetimepicker4" data-toggle="datetimepicker" data-target="#datetimepicker4"/>
+        </th>
+        </tr>
+        </table>
         </div>
-      </div>
-
-
-
-    </div>
-      </div>
         <script type="text/javascript">
             $(function () {
-                $('#datetimepicker_start').datetimepicker({
-                    defaultDate: "{{start_date}}"
+                $('#datetimepicker5').datetimepicker({
+                    defaultdate:"{{start_date}}",
+                    minDate: "{{start_date}}",
+                    maxDate: "{{end_date}}"
                 });
             });
             $(function () {
-                $('#datetimepicker_end').datetimepicker({
-                    defaultDate: "{{end_date}}"
+                $('#datetimepicker4').datetimepicker({
+                    defaultdate:"{{end_date}}",
+                    minDate: "{{start_date}}",
+                    maxDate: "{{end_date}}"
                 });
             });
         </script>
-</form>
-  </body>
-</html>
+    </div>
+</div>
+      
+
+
+
+       
