@@ -1,8 +1,8 @@
 from account_control.models import UserStart
 from stock.models import LogSheet
-from datetime import datetime,timedelta
+from datetime import timedelta
 from django.utils import timezone
-from django.shortcuts import redirect
+
 
 def is_superior(request):
     worker = UserStart.objects.get(username=request.user)
@@ -43,7 +43,6 @@ def account_permit(request):
     worker = UserStart.objects.get(username=request.user)
     ten_minutes = timedelta(minutes=15)
     time_now = timezone.now()
-    print('time now',time_now,'time delta',ten_minutes,'time last login',worker.last_login)
     if worker.last_login+ten_minutes > time_now:
         worker.last_login=time_now
         worker.save()

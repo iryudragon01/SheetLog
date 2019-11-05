@@ -5,6 +5,7 @@ from datetime import datetime
 
 # Create your models here.
 class Item(models.Model):
+    objects: models.manager
     name = models.CharField(max_length=120)
     price = models.PositiveIntegerField()
     type = models.PositiveSmallIntegerField(choices=[(1, 'ticket'), (2, 'Air Pay'), (3, 'food')])
@@ -14,6 +15,7 @@ class Item(models.Model):
 
 
 class LogSheet(models.Model):  # log sheet
+    objects: models.manager
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     version = models.PositiveIntegerField()  # index by version
     value = models.PositiveIntegerField()
@@ -21,6 +23,7 @@ class LogSheet(models.Model):  # log sheet
 
 
 class TopUp(models.Model):  # fill up
+    objects: models.manager
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     value = models.PositiveIntegerField()
     worker = models.CharField(max_length=200)
@@ -35,18 +38,21 @@ class TopUp(models.Model):  # fill up
 
 
 class Income(models.Model):
+    objects: models.manager
     name = models.CharField(max_length=200)
     value = models.PositiveIntegerField()
     date_log = models.DateTimeField(auto_now=True)
 
 
 class Expense(models.Model):
+    objects: models.manager
     name = models.CharField(max_length=200)
     value = models.PositiveIntegerField()
     date_log = models.DateTimeField(auto_now=True)
 
 
 class TempExpense(models.Model):
+    objects: models.manager
     name = models.CharField(max_length=200)
     value = models.PositiveIntegerField()
     date_log = models.DateTimeField()
@@ -54,6 +60,7 @@ class TempExpense(models.Model):
 
 # create model for template form
 class DateTimeTemplate(models.Model):
+    objects: models.manager
     date = models.DateField(default=datetime.now())
     time = models.TimeField(default=datetime.now())
 

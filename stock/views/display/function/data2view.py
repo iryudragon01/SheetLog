@@ -1,6 +1,8 @@
-from stock.models import Item,TopUp
+from stock.models import Item,TopUp,LogSheet
 from django.db.models import Sum
 from . import calculater,statement as statementfile
+from django.utils import timezone
+from account_control.scripts.script import user_superior
 
 
 def getdisplay(log_sheets_start,log_sheets_end,date_statement_end):
@@ -10,11 +12,6 @@ def getdisplay(log_sheets_start,log_sheets_end,date_statement_end):
     ListMoney = []
     ListSum = []
     Sum_temp = 0
-    all_item = Item.objects.all()
-    
-    
-    ##################
-
     top_ups = TopUp.objects.filter(date_log__gt=log_sheets_start[0].date_log,date_log__lt=date_statement_end)
     items = Item.objects.all()
     for item in items:
@@ -110,4 +107,17 @@ def gettopup(top_ups, logsheet):
     return ListTop
 
     # start set display
+def setdisplay(request):
+    items = Item.objects.all()
+    log_sheet_last = LogSheet.objects.last()
+    current_time = timezone.now()
+    for item in items:
+        new_log_sheet = LogSheet(item=item,
+                                 version=log_sheet_last.version + 1,
+                                 value=request.POST.get(item.name),
+                                 date_log=current_time)
+        new_log_sheet.save()
+
+    user_superior(request)  # update account_manager start
+    return calculater.normal_get_log(request)
 
