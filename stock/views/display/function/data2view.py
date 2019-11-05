@@ -1,18 +1,18 @@
-from stock.models import Item,TopUp,LogSheet
 from django.db.models import Sum
-from . import calculater,statement as statementfile
 from django.utils import timezone
+from stock.models import Item, TopUp, LogSheet
+from . import calculater, statement as statementfile
 from account_control.scripts.script import user_superior
 
 
-def getdisplay(log_sheets_start,log_sheets_end,date_statement_end):
+def getdisplay(log_sheets_start, log_sheets_end, date_statement_end):
     ListFirst = []
     ListEnd = []
     ListVolume = []
     ListMoney = []
     ListSum = []
     Sum_temp = 0
-    top_ups = TopUp.objects.filter(date_log__gt=log_sheets_start[0].date_log,date_log__lt=date_statement_end)
+    top_ups = TopUp.objects.filter(date_log__gt=log_sheets_start[0].date_log, date_log__lt=date_statement_end)
     items = Item.objects.all()
     for item in items:
         sheet_start = 0
@@ -50,7 +50,7 @@ def getdisplay(log_sheets_start,log_sheets_end,date_statement_end):
         ListMoney.append(calculater.item_money(item, sheet_start, sheet_end))
         Sum_temp += calculater.item_money(item, sheet_start, sheet_end)
         ListSum.append(Sum_temp)
-    statement = statementfile.getstatement(log_sheets_start[0].date_log,date_statement_end)
+    statement = statementfile.getstatement(log_sheets_start[0].date_log, date_statement_end)
     get_top_up = gettopup(top_ups=top_ups, logsheet=log_sheets_start)
     is_display_reset = '0'
 
@@ -69,9 +69,8 @@ def getdisplay(log_sheets_start,log_sheets_end,date_statement_end):
     content['sum_temp'] = Sum_temp
 
     return content
-
-
 #  End get display
+
 
 # get topup
 def gettopup(top_ups, logsheet):
@@ -90,9 +89,7 @@ def gettopup(top_ups, logsheet):
     ListTop.append(list_sheet)
     if not top_ups.last():  # check if top_up is exist ?
         return ListTop
-
     top_last = top_ups.last().version
-
     for loop in range(top_last + 1):
         if top_ups.filter(version=loop).count() > 0:
             row_top = top_ups.filter(version=loop)
@@ -101,12 +98,13 @@ def gettopup(top_ups, logsheet):
                 data_item = ''
                 if row_top.filter(item=item).count() == 1:
                     data_item = row_top.get(item=item).value
-                    top_data[0] = row_top.get(item=item).date_log  # .strftime("%d/%m/%y %H:%M")
+                    top_data[0] = row_top.get(item=item).date_log  #
                 top_data.append(data_item)
             ListTop.append(top_data)
     return ListTop
 
-    # start set display
+
+# start set display
 def setdisplay(request):
     items = Item.objects.all()
     log_sheet_last = LogSheet.objects.last()
@@ -120,4 +118,3 @@ def setdisplay(request):
 
     user_superior(request)  # update account_manager start
     return calculater.normal_get_log(request)
-
