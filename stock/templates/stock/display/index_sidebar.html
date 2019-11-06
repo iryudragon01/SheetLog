@@ -2,28 +2,20 @@
 {% if top_ups %}
     <table class="table" >
         {% for top_up in top_ups %}
-            {% ifequal forloop.counter 1 %}
-                <tr>
-                    {% for item in top_up %}
-                        <th>{{item}}</th>
-                    {% endfor %}
-                        </tr>
-            {% else %}
-                        <tr>
-                    {% for fill in top_up %}
-                            {% if forloop.first %}
-                                {% ifequal fill 'date' %}
-                            <th>สต๊อกเก่า</th>
-                                {% else %}
-                                    <th>{{fill.day}}/{{fill.month}}</th>
-                                {% endifequal %}
-                            {% else %}
-                                <td>{{fill}}</td>
-                            {% endif %}
-                    {% endfor %}
-                        </tr>
-            {% endifequal %}
+            <tr >
+                {% for fill in top_up %}
+                    {% if forloop.first %}
+                        {% ifequal fill 'date' %}
+                            <th class="coldate">สต๊อกเก่า</th>
+                        {% else %}
+                            <th class="coldate">{{fill}}</th>
+                        {% endifequal %}
+
+                    {% else %}
+                        <td class="colcontent">{{fill}}</td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
         {% endfor %}
-        </tr>
     </table>
 {% endif %}
