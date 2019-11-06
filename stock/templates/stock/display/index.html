@@ -4,9 +4,9 @@
 <div id="date_block_holder" class="bg-dark" >
 {% include 'stock/display/getdate.html' %}
 </div>
-<button class="tablink" onclick="opentab('main_tab',this,'blue')">main</button>
+<button class="tablink" id="main_button" onclick="opentab('main_tab',this,'blue')">main</button>
 <button class="tablink" onclick="opentab('topup_tab',this,'green')">topup</button>
-<button class="tablink" onclick="opentab('statement_tab',this,'green')">topup</button>
+<button class="tablink" onclick="opentab('statement_tab',this,'green')">statement</button>
               <div class="tabcontent" id="main_tab">
                     {% include 'stock/display/index_main.html' %}
               </div><div class="tabcontent" id="statement_tab">
@@ -53,5 +53,6 @@
      linkbutton.style.backgroundColor="#6FA655"
      linkbutton.style.textColor="white"
      }
+     opentab("main_tab",document.getElementById('main_button'),"red")
 </script>
 {% endblock script %}

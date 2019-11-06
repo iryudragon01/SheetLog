@@ -23,6 +23,7 @@
        <th class="text-white">end:</th><th><input type="button" class="form-control datetimepicker-input" id="enddate" data-toggle="datetimepicker" data-target="#enddate"/>
         </th>
             <th><input class="btn btn-success" type="submit" value="get Data" /></th>
+            <th><input class="btn btn-warning" value="Cancel" onclick="getdate()"/></th>
 
         </tr>
         </table>
@@ -31,7 +32,7 @@
     </div>
 </div>
 
-<div class="container bg-dark text-white" id="date_display">
+<div class="container bg-dark text-white" id="date_display" onclick="getdate()">
     <input class="btn text-white" type="button" value="{{start_date}}">
 
 </div>
