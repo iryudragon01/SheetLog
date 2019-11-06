@@ -18,7 +18,7 @@
         <td>{{item_start}}</td>
         <td>
             <input name="{{item.name}}" id="input_{{forloop.counter}}"  value="{{item_end}}"
-                   onchange="change_input({{forloop.counter}})" class="lastvalue"
+                   onchange="change_input({{forloop.counter}})" class="lastvalue" type="number"
                    onclick="nextid({{forloop.counter}})"
             />
         </td>

@@ -1,10 +1,10 @@
 
 <table class="table">
     <tr>
-        <th class="coldate">date</th>
-        <th class="colcontent">name</th>
-        <th class="colcontent">value</th>
-        <th class="colcontent">summaries</th>
+        <th >date</th>
+        <th >name</th>
+        <th >value</th>
+        <th >summaries</th>
 
     </tr>
 {% if incomes %}
@@ -14,9 +14,9 @@
     <th class="coldate">
         {{income.date_log}}
     </th>
-    <td class="colcontent">{{income.name}}</td>
-    <td class="colcontent text-success">{{income.value}}</td>
-    <td class="colcontent">{% if forloop.last %}
+    <td >{{income.name}}</td>
+    <td class="text-success">{{income.value}}</td>
+    <td >{% if forloop.last %}
         {{sum_income}} {% endif %}</td>
 </tr>
 {% endfor %}
@@ -26,9 +26,9 @@
 {%for expense in expenses %}
 <tr>
     <td class="coldate">{{expense.date_log}}</td>
-    <td class="colcontent">{{expense.name}}</td>
-    <td class="colcontent text-danger"> {{expense.value}}</td>
-    <td class="colcontent">{% if forloop.last %}
+    <td >{{expense.name}}</td>
+    <td class="text-danger"> {{expense.value}}</td>
+    <td >{% if forloop.last %}
         {{sum_expense}} {% endif %}</td>
 </tr>
 {% endfor %}
@@ -38,9 +38,9 @@
 {%for temp in temps %}
 <tr>
     <td class="coldate">{{temp.date_log}}</td>
-    <td class="coldate">{{temp.name}}</td>
-    <td class="colcontent text-danger">{{temp.value}}</td>
-    <td class="colcontent">{% if forloop.last %}
+    <td >{{temp.name}}</td>
+    <td class="text-danger">{{temp.value}}</td>
+    <td >{% if forloop.last %}
         {{sum_temp}} {% endif %}</td>
 </tr>
 {% endfor %}

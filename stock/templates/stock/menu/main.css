@@ -38,42 +38,9 @@ display:inline-block;padding:8px 16px;vertical-align:middle;overflow:hidden;text
   padding: 100px 20px;
   height: 100%;
 }
-
-/* Style col   */
-.colcontent{
-  background-color: #555;
-  color: white;
-  float: left;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  padding: 14px 16px;
-  font-size: 17px;
-  width: 10%;
-}
-/* Style col   */
+/* Style col date  */
 .coldate{
-  background-color: #555;
-  color: white;
-  float: left;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  padding: 14px 16px;
-  font-size: 17px;
-  width: 25%;
-}
-/* Style colmain  */
-.colmain{
-  background-color: #555;
-  color: white;
-  float: left;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  padding: 14px 16px;
-  font-size: 17px;
-  width: 15%;
+  width: 20%;
 }
 input {
     border: none;
