@@ -4,26 +4,28 @@
 {%csrf_token%}
 <table class="table">
     <tr>
-        <th class="coldate">name</th>
-        <th class="colcontent">first</th>
-        <th class="colmain">last</th>
-        <th class="colcontent">price</th>
-        <th class="colcontent">sales</th>
-        <th class="colcontent">money</th>
-        <th class="colmain">sum</th>
+        <th>name</th>
+        <th>first</th>
+        <th>last</th>
+        <th>price</th>
+        <th>sales</th>
+        <th>money</th>
+        <th>sum</th>
     </tr>
 {% for item,item_start,item_end,item_sale,item_money,item_sum in items %}
     <tr>
-        <th class="coldate">{{item.name}}</th>
-        <td class="colcontent">{{item_start}}</td>
-        <td class="colmain">
+        <th>{{item.name}}</th>
+        <td>{{item_start}}</td>
+        <td>
             <input name="{{item.name}}" id="input_{{forloop.counter}}"  value="{{item_end}}"
-                   onchange="change_input({{forloop.counter}})" />
+                   onchange="change_input({{forloop.counter}})" class="lastvalue"
+                   onclick="nextid({{forloop.counter}})"
+            />
         </td>
-        <td class="colcontent">{{ item.price }}</td>
-        <td class="colcontent">{{ item_sale }}</td>
-        <td class="colcontent">{{item_money }}</td>
-    <td class="colmain">{% if forloop.last %}
+        <td>{{ item.price }}</td>
+        <td>{{ item_sale }}</td>
+        <td>{{item_money }}</td>
+    <td>{% if forloop.last %}
         {{item_sum}} {% endif %}</td>
     </tr>
 {% endfor %}
