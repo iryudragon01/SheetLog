@@ -3,20 +3,18 @@
 {%block content%}
 <div id="date_block_holder" class="bg-dark" >
 {% include 'stock/display/getdate.html' %}
-
 </div>
-            <div class="row">
-              <div class="col-md-6">
+<button class="tablink" onclick="opentab('main_tab',this,'blue')">main</button>
+<button class="tablink" onclick="opentab('topup_tab',this,'green')">topup</button>
+<button class="tablink" onclick="opentab('statement_tab',this,'green')">topup</button>
+              <div class="tabcontent" id="main_tab">
                     {% include 'stock/display/index_main.html' %}
-
+              </div><div class="tabcontent" id="statement_tab">
                     {% include 'stock/display/index_income.html' %}
               </div>
-              <div class="col-md-6">
-                <div class="content-section">
+                <div class="tabcontent" id="topup_tab">
                     {% include 'stock/display/index_sidebar.html' %}
                 </div>
-              </div>
-            </div>
 {% endblock content %}
 
 
@@ -35,6 +33,25 @@
           display_date.style.display="none"
         }
         
+     }
+
+     function opentab(pagename,linkbutton,color){
+    tabcontent=document.getElementsByClassName("tabcontent")
+     // hide all tabcontent
+     for(i=0;i<tabcontent.length;i++){
+        tabcontent[i].style.display="none";
+     }
+
+     // clear button bg
+     tablink = document.getElementsByClassName("tablink")
+     for(i=0;i<tablink.length;i++){
+     tablink[i].style.backgroundColor="";
+     }
+
+
+     document.getElementById(pagename).style.display="block";
+     linkbutton.style.backgroundColor="#6FA655"
+     linkbutton.style.textColor="white"
      }
 </script>
 {% endblock script %}
