@@ -1,18 +1,21 @@
 
-        <li class="nav-item">
-                <a class="btn "  href="{% url 'stock:list_item' %} ">สินค้า</a>
-        </li>
-
-        <li class="nav-item">
-                <li><a class="btn " href="{% url 'stock:list_top_up' %}">เติมสินค้า</a>
-        </li>
-
-        <li class="nav-item">
-            <a class="btn " href="{% url 'stock:list_income' %}">Income</a>
-        </li>
-
-        <li class="nav-item">
-            <a class="btn " href="{% url 'stock:list_expense' %}">Expense</a></li>
-        <li class="nav-item">
-            <a class="btn " href="{% url 'stock:list_temp' %}">Temp</a>
-        </li>
+    <ul >
+        <li><a href="{% url 'stock:index' %}">Home</a></li>
+        <li><a href="{% url 'stock:list_item' %} ">สินค้า</a></li>
+        <li><a href="{% url 'stock:list_top_up' %}">เติมสินค้า</a></li>
+        <li><a href="{% url 'stock:list_item' %} ">สินค้า</a></li>
+        <li><a href="{% url 'stock:list_income' %}">Income</a></li>
+        <li><a href="{% url 'stock:list_expense' %}">Expense</a></li><li>
+        <li><a href="{% url 'stock:list_temp' %}">Temp</a></li>
+          {% if is_Display_reset %}
+              {% ifequal is_Display_reset '1' %}
+                  <li><a href="{% url 'account_control:reset_index' %}">Reset Data</a></li>
+              {% endifequal %}
+          {% endif %}
+          {% if user.is_authenticated %}
+              <li><a href="{% url 'account_control:logout' %}">Logout</a></li>
+          {% else %}
+              <li><a href="{% url 'account_control:index' %}">Login</a></li>
+              <li><a href="{% url 'account_control:register' %}">Register</a></li>
+          {% endif %}
+    </ul>
