@@ -1,5 +1,35 @@
+function showinput(id){
+  for(i=0 ; i<last_value.length;i++){
+    last_value[i].querySelector('input').style.display="none"
+    last_value[i].querySelector('label').style.display="block"
+  }
+  my_input = last_value[eval(id-1)].querySelector('input')
+  my_label = last_value[eval(id-1)].querySelector('label')
+  my_label.style.display = "none";
+  my_input.style.display="block";
+  my_input.focus()
+  my_input.select()
+    nextid(id)
 
-    function getdate(){
+
+}
+function keydowninput(e,id,inputitem){
+  if(e.keyCode==13){
+    my_label = last_value[eval(id-1)].querySelector('label')
+    my_label.innerHTML = inputitem.value
+
+    showinput(nextid(id))
+  }
+}
+function blurinput(id,inputitem){
+    my_label = last_value[eval(id-1)].querySelector('label')
+    my_label.innerHTML = inputitem.value
+    inputitem.style.display = "none";
+    my_label.style.display = "block";
+}
+
+
+function getdate(){
         get_date=document.getElementById('date_block')
         display_date=document.getElementById('date_display')
         if (get_date.style.display=="block"){
@@ -34,13 +64,18 @@ function opentab(pagename,linkbutton,colorbg){
 
 
 const log = document.getElementById('main_tab');
+const last_value = document.getElementsByClassName("last_value");
 var next_id=1
 var totalitem=document.getElementsByClassName('lastvalue').length
 function nextid(id){
-    if(id==totalitem)
-        { next_id=1}
+    if(id==last_value.length)
+        {
+          next_id=1;
+          return next_id
+        }
     else{
-        next_id=eval(id)+1
+          next_id=eval(id)+1
+          return next_id
         }
     }
 

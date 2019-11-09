@@ -16,10 +16,11 @@
     <tr>
         <th>{{item.name}}</th>
         <td>{{item_start}}</td>
-        <td>
-            <input name="{{item.name}}" id="input_{{forloop.counter}}"  value="{{item_end}}"
-                   onchange="change_input({{forloop.counter}})" class="lastvalue" type="number"
-                   onclick="nextid({{forloop.counter}})"
+        <td  onclick="showinput({{forloop.counter}})" class="last_value">
+            <label>{{item_end}}</label>
+            <input name="{{item.name}}" value="{{item_end}}"
+              onblur="blurinput({{forloop.counter}},this)"
+              type="number" onkeydown="keydowninput(event,{{forloop.counter}},this)"
             />
         </td>
         <td>{{ item.price }}</td>
