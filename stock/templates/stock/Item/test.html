@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="edit.css">
+  </head>
+  <body>
+    <div class="container">
+        <div class="row">
+          <p>รายการ</p>
+          <p>name</p>
+        </div>
+        <div class="clr">
+
+        </div>
+            <div class="row">
+              <p>รายการ2</p>
+              <p>name2</p>
+            </div>
+            <div class="clr">
+
+            </div>
+            <div class="row">
+              <p>list</p>
+              <p onclick="popup_type()" id="type_selectd"> food</p>
+            </div>
+            <div class="clr">
+
+            </div>
+            <div id="popup">
+              <ul>
+                    <li value="1" onclick="select_type(this)"  onclick="select_type(this)">Ticket</li>
+                    <li value="2" onclick="select_type(this)">Air pay</li>
+                    <li value="3" onclick="select_type(this)">Food</li>
+              </ul>
+
+            </div>
+    </div>
+<script type="text/javascript">
+  function popup_type(){
+    document.getElementById('popup').style.display="block";
+  }
+  function select_type(type){
+    document.getElementById('popup').style.display="none";
+    document.getElementById('type_selectd').innerHTML=type.innerHTML
+  }
+</script>
+  </body>
+</html>

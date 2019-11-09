@@ -86,12 +86,17 @@ body{
 
 }
 .table td input{
-  display: none;
+  background-color:inherit;
   font-size: 17px;
   padding: 14px 16px;
   max-width: 100px;
   margin: auto;
 }
+
+
+
+
+
 .topup_display{
   line-height: 0px;
 }
