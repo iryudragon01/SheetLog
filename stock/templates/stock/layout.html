@@ -1,56 +1,26 @@
 <!DOCTYPE html>
-{% load l10n %}
-{% localize on %}
-<html>
-    <head>
+{%load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <link rel="stylesheet" href="{% static 'stock/css/style.css' %}">
+    <meta charset="utf-8">
+    <title>Layout 2</title>
+  </head>
+  <body>
 
-    {% include 'stock/menu/head.html' %}
-
-    </head>
-    <body class="bg-green">
-    <!-- Nav bar  -->
-    <nav class="navbar navbar-expand-md navbar-dark ">
-    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2 " >
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="btn" href="{% url 'stock:index' %}">Home</a>
-            </li>
-            {% if user.is_authenticated %}
-            {% include 'stock/menu/leftmenu.html' %}
-            {% endif %}
-        </ul>
-    </div>
-    <div class="mx-auto order-0">
-        <a class="navbar-brand mx-auto" href="#">{{user}}</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </div>
-    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
-        <ul class="navbar-nav ml-auto">
-            {%include 'stock/menu/rightmenu.html' %}
-
-        </ul>
-    </div>
+    <nav id="navbar">
+      {% include 'stock/menu/leftmenu.html' %}
     </nav>
-        {% if message %}
-            <div class="{{message_class}}" >{{message}}</div>
-        {% endif %}
+    <div class="clr"></div>
 
 
 
 
+      {%block content%}
+      {%endblock%}
 
-                {% block content %}{% endblock %}
+    {%block script%}
+    {%endblock script%}
 
-
-
-
-
-
-            {% endlocalize %}
-        {% block script %}
-        {% endblock script %}
-        {% include 'stock/menu/foot.html' %}
-    </body>
+  </body>
 </html>

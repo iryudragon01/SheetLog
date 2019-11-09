@@ -1,12 +1,14 @@
-{% extends "stock/layout2.html"%}
+{% extends "stock/layout.html"%}
 
 {%block content%}
-<div id="date_block_holder" class="bg-dark" >
-{% include 'stock/display/getdate.html' %}
-</div>
-<button class="tablink" id="main_button" onclick="opentab('main_tab',this,'blue')">main</button>
-<button class="tablink" onclick="opentab('topup_tab',this,'green')">topup</button>
-<button class="tablink" onclick="opentab('statement_tab',this,'green')">statement</button>
+{% load static %}
+<div class="container">
+  <div id="content-menu-fix">
+    <button class="tablink" id="main_button" onclick="opentab('main_tab',this,'#4caf50')">main</button>
+    <button class="tablink" onclick="opentab('topup_tab',this,'#900C3F')">topup</button>
+    <button class="tablink" onclick="opentab('statement_tab',this,'#C70039')">statement</button>
+    <div class="clr"></div>
+  </div>
               <div class="tabcontent" id="main_tab">
                     {% include 'stock/display/index_main.html' %}
               </div><div class="tabcontent" id="statement_tab">
@@ -15,72 +17,12 @@
                 <div class="tabcontent" id="topup_tab">
                     {% include 'stock/display/index_sidebar.html' %}
                 </div>
+</div>
+
 {% endblock content %}
 
 
 {% block script %}
 
-<script>
-
-    function getdate(){
-        get_date=document.getElementById('date_block')
-        display_date=document.getElementById('date_display')
-        if (get_date.style.display=="block"){
-          get_date.style.display = "none"
-          display_date.style.display = "block"
-        }else{
-          get_date.style.display = "block"
-          display_date.style.display="none"
-        }
-
-     }
-
-     function opentab(pagename,linkbutton,color){
-    tabcontent=document.getElementsByClassName("tabcontent")
-     // hide all tabcontent
-     for(i=0;i<tabcontent.length;i++){
-        tabcontent[i].style.display="none";
-     }
-
-     // clear button bg
-     tablink = document.getElementsByClassName("tablink")
-     for(i=0;i<tablink.length;i++){
-     tablink[i].style.backgroundColor="";
-     }
-
-
-     document.getElementById(pagename).style.display="block";
-     linkbutton.style.backgroundColor="#6FA655"
-     linkbutton.style.textColor="white"
-     }
-     opentab("main_tab",document.getElementById('main_button'),"red")
-
-
-
-
-
-const log = document.getElementById('main_tab');
-var next_id=1
-var totalitem=document.getElementsByClassName('lastvalue').length
-function nextid(id){
-    if(id==totalitem)
-        { next_id=1}
-    else{
-        next_id=eval(id)+1
-        }
-    }
-
-
-
-
-document.addEventListener('keypress', logKey);
-function logKey(e) {
-  if(13==e.which){
-  document.getElementById("input_"+next_id).focus()
-  document.getElementById("input_"+next_id).select()
-
-  nextid(next_id)
-  }
-}
-</script>
+<script src="{% static 'stock/scripts/display.js' %}" ></script>
 {% endblock script %}

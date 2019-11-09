@@ -1,0 +1,76 @@
+
+/*body{
+  background-image: url("../images/bgimage.jpg");
+  color: #fff;
+  text-family: arial,sans-serif;
+  font-size: 16px;
+  line-height: 1.6em;
+  margin: 0 0;
+}*/
+.clr{
+  clear: both;
+}
+
+body{
+  background-image: url("../images/bgimage.jpg");
+  overflow: hidden;
+
+}
+#navbar{
+  margin: 0px;
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+#navbar ul{
+  background-color: orange;
+}
+#navbar li{
+  margin: 0px;
+  display: inline;
+  list-style: none;
+}
+#navbar a{
+  text-decoration: none;
+  color: black;
+  background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+}
+.container{
+
+  width: 90%;
+  margin:55px auto;
+  background-color: #ccc;
+}
+#content-menu-fix{
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+#content-menu-fix button{
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+/* Change background color of buttons on hover */
+#content-menu-fix button:hover {
+  background-color: #ddd;
+}
+
+
+/*
+@@media(max-width=600px) {
+
+}
+*/
