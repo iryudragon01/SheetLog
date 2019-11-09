@@ -1,53 +1,49 @@
-
-<table class="table">
-    <tr>
-        <th >date</th>
-        <th >name</th>
-        <th >value</th>
-        <th >summaries</th>
-
-    </tr>
+<div class="topup_display">
+  <p>date</p>
+  <p>name</p>
+  <p>value</p>
+  <p>summary</p>
+</div>
+<div class="clr"></div>
 {% if incomes %}
-<!--<table class="table table-dark"> -->
 {%for income in incomes %}
-<tr>
-    <th class="coldate">
-        {{income.date_log}}
-    </th>
-    <td >{{income.name}}</td>
-    <td class="text-success">{{income.value}}</td>
-    <td >{% if forloop.last %}
-        {{sum_income}} {% endif %}</td>
-</tr>
+  <div class="topup_display">
+      <p>{{income.date_log}}</p>
+      <p>{{income.name}}</p>
+      <p class="income">{{income.value}}</p>
+      <p >{% if forloop.last %}
+          {{sum_income}} {% endif %}</p>
+  </div>
+<div class="clr"></div>
 {% endfor %}
 {% endif %}
+
+
 
 {% if expenses %}
 {%for expense in expenses %}
-<tr>
-    <td class="coldate">{{expense.date_log}}</td>
-    <td >{{expense.name}}</td>
-    <td class="text-danger"> {{expense.value}}</td>
-    <td >{% if forloop.last %}
-        {{sum_expense}} {% endif %}</td>
-</tr>
+  <div class="topup_display">
+      <p>{{expense.date_log}}</p>
+      <p>{{expense.name}}</p>
+      <p class="expense">{{expense.value}}</p>
+      <p >{% if forloop.last %}
+          {{sum_expense}} {% endif %}</p>
+  </div>
+<div class="clr"></div>
 {% endfor %}
 {% endif %}
+
+
 
 {% if temps %}
 {%for temp in temps %}
-<tr>
-    <td class="coldate">{{temp.date_log}}</td>
-    <td >{{temp.name}}</td>
-    <td class="text-danger">{{temp.value}}</td>
-    <td >{% if forloop.last %}
-        {{sum_temp}} {% endif %}</td>
-</tr>
+  <div class="topup_display">
+      <p>{{temp.date_log}}</p>
+      <p>{{temp.name}}</p>
+      <p class="temp">{{temp.value}}</p>
+      <p >{% if forloop.last %}
+          {{sum_temp}} {% endif %}</p>
+  </div>
+<div class="clr"></div>
 {% endfor %}
 {% endif %}
-</table>
-   <input class="btn btn-success" type="button" value="Update" onclick="submit()" id="submit" />
-
-
-    </form>
-

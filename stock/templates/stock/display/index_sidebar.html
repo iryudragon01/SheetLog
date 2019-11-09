@@ -1,21 +1,19 @@
-
 {% if top_ups %}
-    <table class="table" >
-        {% for top_up in top_ups %}
-            <tr >
-                {% for fill in top_up %}
-                    {% if forloop.first %}
-                        {% ifequal fill 'date' %}
-                            <th class="coldate">สต๊อกเก่า</th>
-                        {% else %}
-                            <th class="coldate">{{fill}}</th>
-                        {% endifequal %}
+    {%for top_up in top_ups%}
+        <div class="topup_display">
+        {%for fill in top_up%}
+                <p>{{fill}}</p>
+        {%endfor%}
+      </div>
+      <div class="clr">
 
-                    {% else %}
-                        <td >{{fill}}</td>
-                    {% endif %}
-                {% endfor %}
-            </tr>
-        {% endfor %}
-    </table>
+      </div>
+    {%endfor%}
+
+
+
+
+
+
+
 {% endif %}

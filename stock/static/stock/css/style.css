@@ -9,6 +9,7 @@
 }*/
 .clr{
   clear: both;
+  overflow: hidden;
 }
 
 body{
@@ -70,16 +71,12 @@ body{
   width: 100%
 }
 .table th{
-  background-color: inherit;
-  border: 1px solid #cc1;
   padding: 14px 16px;
   transition: 0.3s;
   font-size: 17px;
 }
 
 .table td{
-  background-color: inherit;
-  border: 1px solid #cc1;
   padding: 14px 16px;
   transition: 0.3s;
   font-size: 17px;
@@ -90,13 +87,33 @@ body{
 }
 .table td input{
   display: none;
-  background-color: #ccc;
   font-size: 17px;
   padding: 14px 16px;
   max-width: 100px;
   margin: auto;
 }
-
+.topup_display{
+  line-height: 0px;
+}
+.topup_display p{
+  font-size: 17px;
+  padding: 14px 16px;
+  float: left;
+  width: 50px;
+  text-align: right;
+}
+.topup_display p.income{
+  color: green;
+}
+.topup_display p.expense{
+  color: red;
+}
+.topup_display p.temp{
+  color: red;
+}
+.topup_display p:first-child{
+  width: 170px;
+}
 /*
 @@media(max-width=600px) {
 

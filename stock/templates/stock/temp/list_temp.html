@@ -2,19 +2,30 @@
 {% block content %}
 <div class="container">
 {% if temps %}
-    {% for temp in temps %}
-        <div class="row">
-            <div class="col-md-3">{{temp.date_log}}</div>
-            <div class="col-md-1">{{temp.name}}</div>
-            <div class="col-md-1">{{temp.value}}</div>
-            <div class="col-md-1"><a href="{% url 'stock:edit_temp' temp.id %}"><button>Edit</button></a> </div>
-        </div>
-    {% endfor %}
+    <table class="table">
+      <tr>
+        <th>วันที่</th>
+        <th>รายการ</th>
+        <th>จำนวน</th>
+        <th>แก้ไข</th>
+      </tr>
+      {% for temp in temps %}
+      <tr>
+        <td>{{temp.date_log}}</td>
+        <td>{{temp.name}}</td>
+        <td>{{temp.value}}</td>
+        <td><a href="{% url 'stock:edit_temp' temp.id %}"><button>Edit</button></a></td>
+      </tr>
+      {% endfor %}
 {% endif %}
-    <div class="row">
-        <div class="col-md-3">
-            <a class="btn btn-success" href="{% url 'stock:create_temp' %}">เพิ่มรายการ</a>
-        </div>
-    </div>
-</div>
+    <tr>
+        <td>
+            <a class="btn btn-success" href="{% url 'stock:create_statement' %}">เพิ่มรายการ</a>
+        </td>
+
+    </tr>
+
+
+
+</table>
 {% endblock %}
