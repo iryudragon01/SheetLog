@@ -5,7 +5,7 @@
 <div class="container" >
 
 {% if item %}
-<form action="" method="post">
+<form action="" method="post" id="form">
     {%csrf_token%}
 <div class="row">
     <p>สินค้า</p>
@@ -13,31 +13,26 @@
 </div><div class="clr"></div>
 <div class="row">
     <p>ราคา</p>
-    <p><input name="type" value="{{item.price}}"></p>
+    <p><input name="price" id='price' type="number" value="{{item.price}}"></p>
 </div><div class="clr"></div>
 <div class="row">
       <p>ประเภท</p>
-      <p>
-          <input type="hidden" name="type" value="{{item.type}}">
-          <p onclick="popup_type()" id="type_selectd"> type</p>
-      </p>
+      <p onclick="popup_type(event)" id="type_selectd"> type</p>
 </div>
 <div class="clr"></div>
 <div class="row">
-  <p>
-          <input class="w3-btn" type="submit" value="Update"/></p>
-  <p>
-          <a class="w3-btn" href="{%url 'stock:list_item'%}"><input type="button" value="Cancel" /></a></p>
+  <p><a href="{% url 'stock:list_item' %}">Cancel</a></p>
+  <p><a onclick="submitform('UPDATE')">Update</a></p>
 
 </div><div class="clr"></>
   <div class="row">
     <p>ลบสินค้าออกจาก ฐานข้อมูล</p>
-    <p><input type="submit" name="DELETE" class="btn btn-danger" value="ลบ {{item.name }}"</p>
+    <p><a onclick="submitform('DELETE')">ลบ {{item.name }}</a></p>
 
   </div><div class="clr">
 
     <div id="popup">
-      <ul>
+      <ul id='setposition'>
             <li value="1" onclick="select_type(this)" onblur="blur_type()">Ticket</li>
             <li value="2" onclick="select_type(this)" onblur="blur_type()">Air pay</li>
             <li value="3" onclick="select_type(this)" onblur="blur_type()">Food</li>
@@ -45,6 +40,11 @@
 
     </div>
 
+  </div>
+  <div class="hidden_form">
+    <input type="input"  id="type"   name="type"   value="{{item.type}}">
+    <button type="sumbit" id="UPDATE" name="UPDATE">UPDATE</button>
+    <button type="sumbit" id="DELETE" name="DELETE" >DELETE</button>
   </div>
 </form>
 {% else %}
